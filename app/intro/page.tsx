@@ -64,46 +64,80 @@ export default function IntroPage() {
 
   return (
     <div className="min-h-screen bg-white pb-24 font-sans text-slate-900 leading-relaxed">
-      {/* 상단 헤더 */}
-      <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 p-4">
-        <div className="max-w-2xl mx-auto flex items-center gap-4">
-          <Link href="/" className="p-2 hover:bg-slate-100 rounded-full transition-colors">
-            <span className="text-xl">←</span>
+      
+      {/* 🚀 변경됨: 상단 헤더 - 제주의 활기찬 에너지를 담은 그라데이션 배경 */}
+      <div className="relative h-[280px] flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-500 to-teal-400">
+        {/* 장식용 빛무리 */}
+        <div className="absolute top-[-20%] left-[-10%] w-72 h-72 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-[-10%] right-[-5%] w-80 h-80 bg-teal-300/20 rounded-full blur-3xl"></div>
+        
+        <div className="relative z-10 text-center px-4">
+          <Link href="/" className="absolute -top-16 left-0 p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors backdrop-blur-md">
+            <span className="text-white text-xl">←</span>
           </Link>
-          <h1 className="font-black text-lg">2026 Out Reach 안내</h1>
+          <span className="inline-block py-1 px-3 rounded-full bg-white/20 text-[10px] font-black text-white mb-3 backdrop-blur-md border border-white/30 tracking-widest uppercase">
+            2026 JEJU OUTREACH
+          </span>
+          <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight drop-shadow-xl italic">
+            안내 및 일정
+          </h1>
         </div>
       </div>
 
-      <div className="max-w-2xl mx-auto px-6 mt-10 space-y-20">
+      <div className="max-w-2xl mx-auto px-6 -mt-10 relative z-20 space-y-20">
         
-        {/* 1. 일정 및 장소 섹션 (기존 디자인 유지) */}
+        {/* 1. 일정 및 장소 섹션 */}
         <section className="animate-in fade-in slide-in-from-bottom-4 duration-500">
           <div className="flex items-center gap-2 mb-6">
             <span className="bg-indigo-600 text-white text-[10px] font-black px-2 py-1 rounded italic uppercase">Part 01</span>
             <h2 className="text-2xl font-black italic">일정 및 장소</h2>
           </div>
           
-          <div className="relative group overflow-hidden rounded-[2.5rem] bg-slate-900 p-8 text-white shadow-2xl">
-            <div className="absolute -right-10 -bottom-10 opacity-20 group-hover:scale-110 transition-transform duration-700">
-              <span className="text-[120px]">📍</span>
+          <div className="relative group overflow-hidden rounded-[2.5rem] bg-[#0F172A] p-8 md:p-10 text-white shadow-2xl border border-slate-800">
+            {/* 장식 아이콘 */}
+            <div className="absolute -right-6 -bottom-6 opacity-10 group-hover:scale-110 transition-transform duration-700">
+              <span className="text-[140px]">📍</span>
             </div>
-            <div className="relative z-10 space-y-6">
+
+            <div className="relative z-10 space-y-8">
               <div>
-                <p className="text-indigo-400 font-bold text-xs mb-1 uppercase tracking-widest">When</p>
-                <p className="text-2xl font-black">2026. 08. 05(수) — 08. 08(토)</p>
-                <p className="text-slate-400 text-sm mt-1 font-medium">3박 4일간의 영적 대장정</p>
+                <p className="text-indigo-400 font-bold text-xs mb-2 uppercase tracking-widest">When</p>
+                <p className="text-2xl md:text-3xl font-black">2026. 08. 05(수) — 08. 08(토)</p>
+                <p className="text-slate-400 text-sm mt-2 font-medium flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-teal-400 rounded-full animate-ping"></span>
+                  3박 4일간의 영적 대장정
+                </p>
               </div>
-              <div className="w-12 h-[1px] bg-slate-700"></div>
+              
+              <div className="w-full h-[1px] bg-gradient-to-r from-slate-800 via-slate-700 to-transparent"></div>
+              
               <div>
-                <p className="text-indigo-400 font-bold text-xs mb-1 uppercase tracking-widest">Where</p>
-                <p className="text-2xl font-black text-white/95">제주도 *** 수련관</p>
-                <p className="text-slate-400 text-sm mt-1 font-medium">모든 이동은 집결 후 이동(첫날 교회 집결 후 이동)</p>
+                <p className="text-teal-400 font-bold text-xs mb-2 uppercase tracking-widest">Where</p>
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                  <div>
+                    <p className="text-2xl md:text-3xl font-black text-white/95">제주 부영청소년 수련원</p>
+                    <p className="text-slate-400 text-sm mt-2 font-medium leading-relaxed">
+                      모든 이동은 집결 후 이동<br/>(첫날 교회 집결 후 이동)
+                    </p>
+                  </div>
+                  
+                  {/* 🚀 추가됨: 수련원 상세정보 버튼 */}
+                  <a 
+                    href="https://www.booyoungyouth.com/index.php" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white text-[13px] font-black px-6 py-3.5 rounded-2xl backdrop-blur-md border border-white/10 transition-all hover:-translate-y-1 active:scale-95 shadow-lg group/btn"
+                  >
+                    🏠 수련원 상세정보
+                    <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* 2. 사역 목표 섹션 (요청하신 하위 제목 디자인 유지) */}
+        {/* 2. 사역 목표 섹션 */}
         <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-150">
           <div className="flex items-center gap-2 mb-6">
             <span className="bg-indigo-600 text-white text-[10px] font-black px-2 py-1 rounded italic uppercase">Part 02</span>
@@ -112,7 +146,7 @@ export default function IntroPage() {
 
           <div className="space-y-4">
             {goals.map((goal, index) => (
-              <div key={index} className="flex gap-5 p-6 rounded-[2rem] border border-slate-100 hover:border-indigo-100 transition-all bg-white shadow-sm">
+              <div key={index} className="flex gap-5 p-6 rounded-[2rem] border border-slate-100 hover:border-indigo-100 transition-all bg-white shadow-sm hover:shadow-md">
                 <div className={`shrink-0 w-14 h-14 ${goal.color} rounded-2xl flex items-center justify-center text-3xl shadow-sm`}>
                   {goal.emoji}
                 </div>
@@ -127,7 +161,7 @@ export default function IntroPage() {
           </div>
         </section>
 
-        {/* 3. 상세 프로그램 섹션 (새롭게 추가!) */}
+        {/* 3. 상세 프로그램 섹션 */}
         <section className="animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300 pb-10">
           <div className="flex items-center gap-2 mb-8">
             <span className="bg-indigo-600 text-white text-[10px] font-black px-2 py-1 rounded italic uppercase">Part 03</span>
@@ -137,7 +171,6 @@ export default function IntroPage() {
           <div className="space-y-12">
             {schedule.map((day, idx) => (
               <div key={idx} className="relative pl-8 border-l-2 border-indigo-50">
-                {/* 수직 타임라인 포인트 */}
                 <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-white border-4 border-indigo-600"></div>
                 
                 <div className="mb-4">
@@ -145,7 +178,7 @@ export default function IntroPage() {
                   <h3 className="text-xl font-black text-slate-800">{day.day}</h3>
                 </div>
 
-                <div className="bg-slate-50/50 rounded-3xl p-6 space-y-4 border border-slate-100">
+                <div className="bg-slate-50/50 rounded-3xl p-6 space-y-4 border border-slate-100 shadow-sm">
                   {day.items.map((item, i) => (
                     <div key={i} className={`flex justify-between items-center ${i !== day.items.length - 1 ? 'border-b border-slate-100 pb-3' : ''}`}>
                       <span className="text-xs font-bold text-slate-400 font-mono">{item.time}</span>
@@ -162,10 +195,10 @@ export default function IntroPage() {
 
         {/* 하단 푸터 문구 */}
         <div className="pt-10 text-center space-y-4 border-t border-slate-100">
-          <p className="text-slate-400 text-sm font-medium">CONNECT & COMBINE | 2026 SUMMER</p>
+          <p className="text-slate-400 text-sm font-medium italic">CONNECT & COMBINE | 2026 SUMMER JEJU</p>
           <h3 className="text-xl font-black leading-tight break-keep">
-            함께 웃고 울며 성장할 <br/>
-            여러분을 기다립니다!
+            제주의 푸른 바다보다 더 깊은 <br/>
+            하나님의 사랑을 경험할 여러분을 축복합니다!
           </h3>
         </div>
 
