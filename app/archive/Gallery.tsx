@@ -17,7 +17,7 @@ export default function Gallery({ firstOutreach, secondOutreach }: { firstOutrea
   return (
     <div className="min-h-screen bg-[#0F172A] text-white pb-20 font-sans">
       <div className="bg-slate-900/80 py-20 px-6 border-b border-slate-800 text-center backdrop-blur-md">
-        <h1 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">아카이브 기록</h1>
+        <h1 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">이전 아웃리치의 기록</h1>
         <p className="text-slate-400 text-lg font-medium">우리의 발걸음, 은혜의 기록들</p>
       </div>
 
@@ -26,8 +26,8 @@ export default function Gallery({ firstOutreach, secondOutreach }: { firstOutrea
         {/* --- 제2회 섹션 --- */}
         <section>
           <div className="flex items-center gap-4 mb-10">
-            <span className="bg-indigo-600 px-4 py-1.5 rounded-full text-sm font-black tracking-tighter">2025 WINTER</span>
-            <h2 className="text-2xl md:text-3xl font-black text-white italic">제2회 겨울 아웃리치: '빛으로'</h2>
+            <span className="bg-indigo-600 px-4 py-1.5 rounded-full text-sm font-black tracking-tighter">2회 2022년</span>
+            <h2 className="text-2xl md:text-3xl font-black text-white italic">07.27 ~ 07.30 : 제주를 주님께 ! </h2>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -47,8 +47,8 @@ export default function Gallery({ firstOutreach, secondOutreach }: { firstOutrea
         {/* --- 제1회 섹션 --- */}
         <section>
           <div className="flex items-center gap-4 mb-10">
-            <span className="bg-purple-600 px-4 py-1.5 rounded-full text-sm font-black tracking-tighter">2024 SUMMER</span>
-            <h2 className="text-2xl md:text-3xl font-black text-white italic">제1회 여름 아웃리치: '다시 복음으로'</h2>
+            <span className="bg-purple-600 px-4 py-1.5 rounded-full text-sm font-black tracking-tighter">1회 2019년</span>
+            <h2 className="text-2xl md:text-3xl font-black text-white italic">08.07 ~ 08.10 : 제주를 복음으로 !</h2>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
