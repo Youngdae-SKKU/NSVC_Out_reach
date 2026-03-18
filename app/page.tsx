@@ -52,7 +52,7 @@ export default async function Home() {
           </div>
           
           <h1 className="text-3xl md:text-5xl lg:text-5xl font-black text-white drop-shadow-lg tracking-tight leading-tight">
-            2026년 남서울비전교회<br/>중등부 아웃리치
+            제3회 2026 중등부 제주 아웃리치<br/> [남서울비전교회]
           </h1>
           
           <p className="text-white/95 text-lg md:text-xl mt-2 font-bold italic drop-shadow-md tracking-tight">

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-// 🚀 1. 선생님이 화살표 쳐주신 바로 그 자리! 챗봇 부품 불러오기
-import ChannelTalk from "./ChannelTalk";
+// ✅ 1. 바뀐 파일 이름(KakaoChatButton)으로 정확히 불러옵니다.
+import KakaoChatButton from "./KakaoChatButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,7 +15,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// 💡 웹사이트 탭에 뜨는 이름도 예쁘게 수정했습니다
 export const metadata: Metadata = {
   title: "2026 남서울비전교회 아웃리치",
   description: "연결되고 결합되어 (엡 4:16)",
@@ -33,8 +32,8 @@ export default function RootLayout({
       >
         {children}
         
-        {/* 🚀 2. 홈페이지 전체 화면에 챗봇 버튼 달아주기! */}
-        <ChannelTalk />
+        {/* ✅ 2. 화면 전체에 카카오톡 버튼을 띄웁니다. */}
+        <KakaoChatButton />
         
       </body>
     </html>
