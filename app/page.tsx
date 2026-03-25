@@ -1,11 +1,11 @@
-import { getPaymentStatus, getNotices } from "../notion"; // 경로 확인 필요
-import StatusSection from "./StatusSection"; // 경로 확인 필요
+import { getPaymentStatus, getNotices } from "../notion"; // notion.js 위치에 맞게 수정
+import StatusSection from "./StatusSection"; // StatusSection.tsx 위치에 맞게 수정
 import Link from "next/link";
 
-// ✅ Next.js 빌드 에러 해결을 위한 동적 렌더링 강제 설정
+// ✅ Next.js 빌드 및 배포 에러 방지를 위한 설정
 export const dynamic = "force-dynamic";
 
-// 📅 D-Day를 자동으로 계산해 주는 함수
+// 📅 D-Day 계산 함수
 function getDDay() {
   const now = new Date();
   const target = new Date('2026-08-05T00:00:00+09:00'); 
@@ -17,8 +17,9 @@ function getDDay() {
   return `D+${Math.abs(dDay)}`;
 }
 
-// ✅ 1주일 이내 게시물인지 확인하는 함수 (NEW 배지용)
+// ✅ 1주일 이내 NEW 배지 확인 함수
 const isNew = (dateString: string) => {
+  if (!dateString) return false;
   const today = new Date();
   const postDate = new Date(dateString);
   const diffTime = Math.abs(today.getTime() - postDate.getTime());
@@ -26,7 +27,7 @@ const isNew = (dateString: string) => {
   return diffDays <= 7;
 };
 
-// 공지사항 아이콘 스타일 함수
+// 공지사항 카드 스타일 함수
 function getNoticeStyle(note: string, title: string) {
   if (note?.includes('중요') || title.includes('TEST')) return { color: 'text-rose-600', bg: 'bg-rose-50', border: 'border-rose-100' };
   if (note?.includes('기도') || title.includes('기도') || title.includes('Pray')) return { color: 'text-blue-600', bg: 'bg-blue-50', border: 'border-blue-100' };
@@ -37,7 +38,7 @@ export default async function Home() {
   const data = await getPaymentStatus();
   const allNotices = await getNotices();
   
-  // ✅ 최신순 정렬 후 3개만 추출
+  // 최신순 정렬 후 3개만 추출
   const recentNotices = [...allNotices]
     .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 3); 
@@ -53,7 +54,7 @@ export default async function Home() {
         <div className="absolute inset-0 opacity-30 mix-blend-multiply bg-[url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center"></div>
       </div>
 
-      {/* 🚀 상단 헤더 */}
+      {/* 🚀 상단 헤더 (타이틀 크기 조정 완료) */}
       <div className="relative z-10 bg-gradient-to-r from-[#8B5CF6] via-[#6366F1] to-[#3B82F6] pt-10 pb-8 text-center rounded-b-[30px] shadow-lg">
         <div className="max-w-6xl mx-auto px-4">
           <div className="inline-flex items-center gap-2 bg-white/20 text-white text-[12px] md:text-[14px] font-black pl-4 pr-1.5 py-1.5 rounded-full backdrop-blur-md border border-white/30 mb-3 tracking-widest shadow-sm">
@@ -112,7 +113,8 @@ export default async function Home() {
               <h2 className="text-xl font-black text-slate-800 flex items-center gap-2 tracking-tight">
                 🙏 준비함의 소식
               </h2>
-              <Link href="/notice" className="text-sm font-bold text-slate-500 hover:text-indigo-600 transition-colors mb-0.5">
+              {/* ✅ [중요] 링크 주소를 '/notices'로 수정했습니다. (404 방지) */}
+              <Link href="/notices" className="text-sm font-bold text-slate-500 hover:text-indigo-600 transition-colors mb-0.5">
                 전체보기 &rarr;
               </Link>
             </div>
