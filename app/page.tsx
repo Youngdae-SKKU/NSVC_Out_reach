@@ -1,6 +1,9 @@
-import { getPaymentStatus, getNotices } from "../notion";
-import StatusSection from "./StatusSection";
+import { getPaymentStatus, getNotices } from "../notion"; // 경로 확인 필요
+import StatusSection from "./StatusSection"; // 경로 확인 필요
 import Link from "next/link";
+
+// ✅ Next.js 빌드 에러 해결을 위한 동적 렌더링 강제 설정
+export const dynamic = "force-dynamic";
 
 // 📅 D-Day를 자동으로 계산해 주는 함수
 function getDDay() {
@@ -34,7 +37,7 @@ export default async function Home() {
   const data = await getPaymentStatus();
   const allNotices = await getNotices();
   
-  // ✅ 1. 최신순 정렬 후 3개만 추출
+  // ✅ 최신순 정렬 후 3개만 추출
   const recentNotices = [...allNotices]
     .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 3); 
@@ -59,7 +62,7 @@ export default async function Home() {
               {dDayText}
             </span>
           </div>
-          <h1 className="text-3xl md:text-5xl lg:text-5xl font-black text-white drop-shadow-lg tracking-tight leading-tight">
+          <h1 className="text-2xl md:text-4xl lg:text-4xl font-black text-white drop-shadow-lg tracking-tight leading-tight">
             제3회 2026 중등부 제주 아웃리치<br/> [남서울비전교회]
           </h1>
           <p className="text-white/95 text-lg md:text-xl mt-2 font-bold italic drop-shadow-md tracking-tight">
@@ -109,7 +112,7 @@ export default async function Home() {
               <h2 className="text-xl font-black text-slate-800 flex items-center gap-2 tracking-tight">
                 🙏 준비함의 소식
               </h2>
-              <Link href="/notices" className="text-sm font-bold text-slate-500 hover:text-indigo-600 transition-colors mb-0.5">
+              <Link href="/notice" className="text-sm font-bold text-slate-500 hover:text-indigo-600 transition-colors mb-0.5">
                 전체보기 &rarr;
               </Link>
             </div>
@@ -122,7 +125,7 @@ export default async function Home() {
                     <div key={notice.id} className="flex items-start p-3 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 hover:shadow-md transition-all cursor-pointer group">
                       
                       <div className={`w-14 h-10 shrink-0 rounded-xl flex items-center justify-center text-[11px] font-black ${style.bg} ${style.color} border ${style.border} shadow-inner mt-0.5 px-1 text-center break-keep`}>
-                        {notice.author || "연결필요"}
+                        {notice.author || "교회"}
                       </div>
 
                       <div className="flex flex-col flex-1 ml-3 overflow-hidden">
@@ -149,7 +152,6 @@ export default async function Home() {
                 <div className="text-center py-6 text-slate-400 font-bold text-sm">소식이 없습니다.</div>
               )}
             </div>
-            {/* ✅ 수정사항: 여기에 있던 '이전 공지사항 더보기' 버튼 박스를 삭제했습니다! */}
           </div>
 
           {/* 4️⃣ 등록 및 납부 현황 */}
@@ -158,7 +160,6 @@ export default async function Home() {
                 <div className="text-[150px] font-black text-blue-600">✝</div>
              </div>
              <div className="relative z-10 flex flex-col gap-2">
-               {/* ✅ StatusSection에 isMainPage={true}를 전달해 놓았습니다. */}
                <StatusSection data={data} isMainPage={true} />
              </div>
           </div>

@@ -1,14 +1,16 @@
 import { getPaymentStatus } from "../../notion"; // 경로 확인 필요 (예: ../notion)
 import Link from "next/link";
 
-// ✅ 이름의 두 번째 글자를 '*'로 마스킹하는 함수
+// ✅ Next.js 빌드 에러 해결을 위한 동적 렌더링 강제 설정
+export const dynamic = "force-dynamic";
+
+// 이름 마스킹 함수
 const maskName = (name: string) => {
   if (!name || name.length < 2) return name;
   return name[0] + '*' + name.substring(2);
 };
 
 export default async function StatusPage() {
-  // 노션에서 데이터 가져오기
   const data = await getPaymentStatus();
   const safeData = data || { total: 0, paidCount: 0, students: [] };
   const total = safeData.total || 0;
@@ -74,24 +76,18 @@ export default async function StatusPage() {
           {sortedStudents.length > 0 ? (
             <ul className="flex flex-col">
               {sortedStudents.map((student: any) => (
-                // 화면이 좁을 때(모바일)를 대비해 flex-wrap 속성을 추가하여 자연스럽게 떨어지도록 처리
                 <li key={student.id} className="flex flex-col py-4 px-3 border-b border-slate-100 last:border-0 hover:bg-slate-50/50 transition-colors gap-1.5">
 
                   <div className="flex justify-between items-center w-full flex-wrap gap-y-3">
                     
                     {/* 왼쪽: [학년/셀(크기 고정)] + [이름] + [신청일] */}
                     <div className="flex items-center gap-3">
-                      {/* ✅ 1. 학년/셀 배지: w-14 (고정 너비) 및 text-center를 주어 모든 배지 크기를 통일했습니다. */}
                       <span className="w-14 text-center text-[13px] font-black text-slate-700 bg-slate-100 py-1.5 rounded-md border border-slate-200 whitespace-nowrap shadow-sm shrink-0">
                         {student.group || "미분류"}
                       </span>
-                      
-                      {/* 이름 */}
                       <span className="text-lg font-black text-slate-800 tracking-tight shrink-0">
                         {maskName(student.name)}
                       </span>
-                      
-                      {/* ✅ 2. 신청일: 이름과 똑같은 텍스트 크기(text-lg)로 이름 바로 옆에 배치했습니다. */}
                       <span className="text-lg text-slate-500 font-medium ml-1 whitespace-nowrap">
                         🗓️ 신청일: {student.applyDate}
                       </span>
@@ -99,13 +95,11 @@ export default async function StatusPage() {
 
                     {/* 오른쪽: [납입액 텍스트 + 금액] + [완납/미납(크기 고정)] */}
                     <div className="flex items-center gap-3 ml-auto">
-                      {/* ✅ 3. 납입금액 앞에 '납입액' 텍스트를 추가했습니다. */}
                       <span className="text-base font-bold text-slate-800 text-right whitespace-nowrap">
                         <span className="text-sm font-medium text-slate-500 mr-2">납입액</span>
                         {student.amount?.toLocaleString() || 0}원
                       </span>
                       
-                      {/* 완납/미납 배지 (크기 통일: w-[42px]) */}
                       {student.isPaid ? (
                         <span className="bg-green-100 text-green-600 text-[11px] font-black w-[42px] text-center py-1.5 rounded-full shadow-sm shrink-0">완납</span>
                       ) : (
