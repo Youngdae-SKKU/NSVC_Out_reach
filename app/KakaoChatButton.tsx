@@ -3,7 +3,7 @@
 export default function KakaoChatButton() {
   // 🔗 선생님의 진짜 오픈채팅방 링크가 이미 들어가 있을 것입니다.
   // 예시: const chatUrl = "https://open.kakao.com/o/s1234abc";
-  const chatUrl = "https://open.kakao.com/o/..."; // 여기에 실제 링크가 들어있어야 합니다.
+  const chatUrl = "http://pf.kakao.com/_klxmlX/chat"; // 여기에 실제 링크가 들어있어야 합니다.
 
   return (
     <a

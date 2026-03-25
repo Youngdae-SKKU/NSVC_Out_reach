@@ -65,7 +65,7 @@ export default async function Home() {
           </h1>
           
           <p className="text-white/95 text-lg md:text-xl mt-2 font-bold italic drop-shadow-md tracking-tight">
-            "연결되고 결합되어(엡 4:16)"
+            "푯대를 향하여 (빌 3:14)"
           </p>
         </div>
       </div>
