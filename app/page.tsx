@@ -23,7 +23,7 @@ const isNew = (dateString: string) => {
   return diffDays <= 7;
 };
 
-// 공지사항 아이콘 스타일 함수 (글자 색상 등 유지)
+// 공지사항 아이콘 스타일 함수
 function getNoticeStyle(note: string, title: string) {
   if (note?.includes('중요') || title.includes('TEST')) return { color: 'text-rose-600', bg: 'bg-rose-50', border: 'border-rose-100' };
   if (note?.includes('기도') || title.includes('기도') || title.includes('Pray')) return { color: 'text-blue-600', bg: 'bg-blue-50', border: 'border-blue-100' };
@@ -59,11 +59,9 @@ export default async function Home() {
               {dDayText}
             </span>
           </div>
-          
           <h1 className="text-3xl md:text-5xl lg:text-5xl font-black text-white drop-shadow-lg tracking-tight leading-tight">
             제3회 2026 중등부 제주 아웃리치<br/> [남서울비전교회]
           </h1>
-          
           <p className="text-white/95 text-lg md:text-xl mt-2 font-bold italic drop-shadow-md tracking-tight">
             "푯대를 향하여 (빌 3:14)"
           </p>
@@ -103,7 +101,7 @@ export default async function Home() {
         </div>
 
         <div className="flex flex-col gap-3">
-          {/* 3️⃣ 준비함의 소식 ✅ 수정된 영역 */}
+          {/* 3️⃣ 준비함의 소식 */}
           <div className="bg-white/95 backdrop-blur-2xl rounded-[1.5rem] p-4 md:p-5 shadow-xl border border-white flex flex-col relative h-full">
             <div className="absolute top-3 right-4 text-3xl opacity-20 transform -scale-x-100 pointer-events-none">🌿</div>
             
@@ -111,7 +109,7 @@ export default async function Home() {
               <h2 className="text-xl font-black text-slate-800 flex items-center gap-2 tracking-tight">
                 🙏 준비함의 소식
               </h2>
-              <Link href="/notices" className="text-[10px] font-bold text-slate-400 hover:text-indigo-600 transition-colors mb-0.5">
+              <Link href="/notices" className="text-sm font-bold text-slate-500 hover:text-indigo-600 transition-colors mb-0.5">
                 전체보기 &rarr;
               </Link>
             </div>
@@ -123,17 +121,12 @@ export default async function Home() {
                   return (
                     <div key={notice.id} className="flex items-start p-3 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 hover:shadow-md transition-all cursor-pointer group">
                       
-                      {/* ✅ 1. "?" 대신 게시자(작성자) 이름 표시 */}
-                      <div className={`w-10 h-10 shrink-0 rounded-xl flex items-center justify-center text-[11px] font-black ${style.bg} ${style.color} border ${style.border} shadow-inner mt-0.5`}>
-                        {notice.author ? notice.author.substring(0, 2) : "교회"}
+                      <div className={`w-14 h-10 shrink-0 rounded-xl flex items-center justify-center text-[11px] font-black ${style.bg} ${style.color} border ${style.border} shadow-inner mt-0.5 px-1 text-center break-keep`}>
+                        {notice.author || "연결필요"}
                       </div>
 
                       <div className="flex flex-col flex-1 ml-3 overflow-hidden">
                         <div className="flex items-center gap-2 mb-0.5">
-                          <span className={`text-[9px] font-black ${style.color} uppercase tracking-tighter`}>
-                            {notice.note || "소식"}
-                          </span>
-                          {/* ✅ 2. 'New' 반짝이 배지 추가 */}
                           {isNew(notice.date) && (
                             <span className="bg-red-500 text-white text-[8px] px-1.5 py-0.5 rounded font-black animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.5)]">
                               NEW
@@ -145,10 +138,8 @@ export default async function Home() {
                           {notice.title}
                         </h4>
                         
-                        <div className="text-[10px] text-slate-400 font-medium mt-1 flex items-center gap-1.5">
+                        <div className="text-xs text-slate-500 font-medium mt-1 flex items-center gap-1.5">
                           <span>📅 {notice.date}</span>
-                          <span className="w-0.5 h-0.5 bg-slate-300 rounded-full"></span>
-                          <span className="text-slate-500">✍️ {notice.author || "관리자"}</span>
                         </div>
                       </div>
                     </div>
@@ -158,12 +149,7 @@ export default async function Home() {
                 <div className="text-center py-6 text-slate-400 font-bold text-sm">소식이 없습니다.</div>
               )}
             </div>
-            
-            <div className="mt-4 text-center relative z-10">
-              <Link href="/notices" className="inline-block bg-slate-900 text-white text-[11px] font-bold px-5 py-2 rounded-full shadow-lg hover:bg-slate-800 transition-colors tracking-widest">
-                이전 공지사항 더보기 ▼
-              </Link>
-            </div>
+            {/* ✅ 수정사항: 여기에 있던 '이전 공지사항 더보기' 버튼 박스를 삭제했습니다! */}
           </div>
 
           {/* 4️⃣ 등록 및 납부 현황 */}
@@ -171,8 +157,9 @@ export default async function Home() {
              <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
                 <div className="text-[150px] font-black text-blue-600">✝</div>
              </div>
-             <div className="relative z-10">
-               <StatusSection data={data} />
+             <div className="relative z-10 flex flex-col gap-2">
+               {/* ✅ StatusSection에 isMainPage={true}를 전달해 놓았습니다. */}
+               <StatusSection data={data} isMainPage={true} />
              </div>
           </div>
 

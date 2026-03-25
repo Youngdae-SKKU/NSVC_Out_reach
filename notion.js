@@ -2,7 +2,9 @@
 
 const token = process.env.NOTION_TOKEN;
 
-// 1. 등록 및 납부 현황 진단
+// ==========================================
+// 1. 등록 및 납부 현황 데이터 가져오기
+// ==========================================
 export async function getPaymentStatus() {
   console.log("\n[디버그] --- 회비 데이터 가져오기 시작 ---");
   try {
@@ -39,29 +41,38 @@ export async function getPaymentStatus() {
       const page = data.results[i];
       const p = page.properties;
       
-      // 극단적으로 안전한 데이터 추출 (에러 절대 안 남)
+      // ✅ 이름 가져오기
       let name = "이름없음";
       if (p["이름"] && p["이름"].rich_text && p["이름"].rich_text.length > 0) name = p["이름"].rich_text[0].plain_text;
       else if (p["이름"] && p["이름"].title && p["이름"].title.length > 0) name = p["이름"].title[0].plain_text;
 
+      // ✅ 학년/셀 가져오기 (새로 추가된 부분!)
+      let group = "미분류";
+      if (p["학년/셀"] && p["학년/셀"].title && p["학년/셀"].title.length > 0) group = p["학년/셀"].title[0].plain_text;
+      else if (p["학년/셀"] && p["학년/셀"].rich_text && p["학년/셀"].rich_text.length > 0) group = p["학년/셀"].rich_text[0].plain_text;
+
+      // ✅ 완납여부 가져오기
       let isPaid = false;
       if (p["완납여부"] && typeof p["완납여부"].checkbox === 'boolean') isPaid = p["완납여부"].checkbox;
 
+      // ✅ 신청날짜 가져오기
       let applyDate = "날짜없음";
       if (p["신청날짜"] && p["신청날짜"].date) applyDate = p["신청날짜"].date.start;
 
+      // ✅ 납부 금액 가져오기
       let amount = 0;
       if (p["납부 금액"] && typeof p["납부 금액"].number === 'number') amount = p["납부 금액"].number;
 
-      students.push({ id: page.id, name, isPaid, applyDate, amount });
+      // 학생 배열에 모든 데이터를 담아줍니다.
+      students.push({ id: page.id, name, group, isPaid, applyDate, amount });
     }
+
+    // ✅ 완납 명수(paidCount) 계산하기 (이전에 누락되었던 부분 복구!)
+    const paidCount = students.filter(s => s.isPaid).length;
 
     console.log("[디버그] 4. 화면으로 보낼 최종 학생 수:", students.length);
-    if (students.length > 0) {
-      console.log("[디버그] 5. 첫 번째 학생 데이터 샘플:", students[0]);
-    }
+    console.log("[디버그] 5. 완납 명수:", paidCount);
 
-    const paidCount = students.filter(s => s.isPaid).length;
     return { total: students.length, paidCount, students };
 
   } catch (e) {
@@ -70,7 +81,9 @@ export async function getPaymentStatus() {
   }
 }
 
-// 2. 공지사항 진단
+// ==========================================
+// 2. 공지사항 데이터 가져오기
+// ==========================================
 export async function getNotices() {
   console.log("\n[디버그] --- 공지사항 데이터 가져오기 시작 ---");
   try {
@@ -105,7 +118,13 @@ export async function getNotices() {
       let isVisible = true;
       if (p["노출여부"] && typeof p["노출여부"].checkbox === 'boolean') isVisible = p["노출여부"].checkbox;
 
-      notices.push({ id: data.results[i].id, title, date, note, isVisible });
+      // ✅ 게시자 가져오기 (기존에 추가했던 부분 유지!)
+      let author = "";
+      if (p["게시자"] && p["게시자"].rich_text && p["게시자"].rich_text.length > 0) {
+        author = p["게시자"].rich_text[0].plain_text;
+      }
+
+      notices.push({ id: data.results[i].id, title, date, note, isVisible, author });
     }
     return notices;
   } catch (e) {
