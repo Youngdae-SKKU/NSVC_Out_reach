@@ -132,7 +132,7 @@ export default async function Home() {
                   return (
                     <div key={notice.id} className="flex items-start p-3 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 hover:shadow-md transition-all cursor-pointer group">
                       
-                      <div className={`w-14 h-10 shrink-0 rounded-xl flex items-center justify-center text-[11px] font-black ${style.bg} ${style.color} border ${style.border} shadow-inner mt-0.5 px-1 text-center break-keep`}>
+                      <div className={`w-14 h-10 shrink-0 rounded-xl flex items-center justify-center text-[11px] font-black ${style.bg} ${style.color} border ${style.border} shadow-inner mt-0.5 px-1 text-center`}>
                         {notice.author || "교회"}
                       </div>
 
@@ -147,7 +147,7 @@ export default async function Home() {
                           )}
                         </div>
                         
-                        <h4 className="text-[14px] font-bold text-slate-800 group-hover:text-indigo-600 transition-colors leading-snug break-keep">
+                        <h4 className="text-[14px] font-bold text-slate-800 group-hover:text-indigo-600 transition-colors leading-snug ">
                           {notice.title}
                         </h4>
                         
