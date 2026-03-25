@@ -54,27 +54,34 @@ export default async function Home() {
         <div className="absolute inset-0 opacity-30 mix-blend-multiply bg-[url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center"></div>
       </div>
 
-      {/* 🚀 상단 헤더 (타이틀 크기 조정 완료) */}
-      <div className="relative z-10 bg-gradient-to-r from-[#8B5CF6] via-[#6366F1] to-[#3B82F6] pt-10 pb-8 text-center rounded-b-[30px] shadow-lg">
+      {/* 🚀 상단 헤더 */}
+      <div className="relative z-10 bg-gradient-to-r from-[#8B5CF6] via-[#6366F1] to-[#3B82F6] pt-2 pb-2 text-center rounded-b-[30px] shadow-lg">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="inline-flex items-center gap-2 bg-white/20 text-white text-[12px] md:text-[14px] font-black pl-4 pr-1.5 py-1.5 rounded-full backdrop-blur-md border border-white/30 mb-3 tracking-widest shadow-sm">
+          <div className="inline-flex items-center gap-1 bg-white/20 text-white text-[12px] md:text-[14px] font-black pl-4 pr-1.5 py-1.5 rounded-full backdrop-blur-md border border-white/30 mb-3 tracking-widest shadow-sm">
             <span>🔥 2026 SUMMER OUTREACH</span>
-            <span className="bg-[#FFD700] text-indigo-900 px-3 py-0.5 rounded-full tracking-tighter shadow-[0_0_15px_rgba(255,215,0,0.6)] animate-pulse">
+            
+            {/* 🌟 수정 포인트 1: D-Day 배지 초강력 네온사인 효과 */}
+            <span className="bg-gradient-to-r from-[#FFD700] via-[#FFF8B0] to-[#FFD700] text-indigo-900 px-3 py-0.5 rounded-full tracking-tighter shadow-[0_0_20px_rgba(255,215,0,0.9),0_0_10px_rgba(255,255,255,0.6)] border border-yellow-200 animate-pulse font-extrabold">
               {dDayText}
             </span>
           </div>
+          
           <h1 className="text-2xl md:text-4xl lg:text-4xl font-black text-white drop-shadow-lg tracking-tight leading-tight">
-            제3회 2026 중등부 제주 아웃리치<br/> [남서울비전교회]
-          </h1>
+             2026년 제3회 <br/> 
+              중등부 제주 아웃리치<br/> 
+                <span className="text-lg md:text-xl font-bold opacity-80">
+                - 남서울비전교회 -
+                </span>
+            </h1>
           <p className="text-white/95 text-lg md:text-xl mt-2 font-bold italic drop-shadow-md tracking-tight">
             "푯대를 향하여 (빌 3:14)"
           </p>
         </div>
       </div>
 
-      <div className="relative z-20 max-w-6xl mx-auto px-4 mt-4 grid grid-cols-1 lg:grid-cols-2 gap-3">
+      <div className="relative z-20 max-w-6xl mx-auto px-1 mt-1 grid grid-cols-1 lg:grid-cols-2 gap-1">
         
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-1">
           {/* 1️⃣ 아웃리치 여정 카드 */}
           <Link href="/intro" className="relative rounded-[1.5rem] overflow-hidden shadow-xl group h-[160px] flex flex-col justify-between p-5 border border-white/40 hover:-translate-y-1 transition-transform duration-300">
             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1473172763806-38374e2d26f3?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center transition-transform duration-700 group-hover:scale-110"></div>
@@ -104,16 +111,15 @@ export default async function Home() {
           </Link>
         </div>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-1">
           {/* 3️⃣ 준비함의 소식 */}
           <div className="bg-white/95 backdrop-blur-2xl rounded-[1.5rem] p-4 md:p-5 shadow-xl border border-white flex flex-col relative h-full">
             <div className="absolute top-3 right-4 text-3xl opacity-20 transform -scale-x-100 pointer-events-none">🌿</div>
             
             <div className="flex justify-between items-end mb-4 relative z-10 px-1">
-              <h2 className="text-xl font-black text-slate-800 flex items-center gap-2 tracking-tight">
+              <h2 className="text-xl font-black text-slate-800 flex items-center gap-1 tracking-tight">
                 🙏 준비함의 소식
               </h2>
-              {/* ✅ [중요] 링크 주소를 '/notices'로 수정했습니다. (404 방지) */}
               <Link href="/notices" className="text-sm font-bold text-slate-500 hover:text-indigo-600 transition-colors mb-0.5">
                 전체보기 &rarr;
               </Link>
@@ -131,10 +137,12 @@ export default async function Home() {
                       </div>
 
                       <div className="flex flex-col flex-1 ml-3 overflow-hidden">
-                        <div className="flex items-center gap-2 mb-0.5">
+                        <div className="flex items-center gap-1 mb-0.5">
+                          
+                          {/* 🌟 수정 포인트 2: NEW 배지 그라데이션, 강력한 빛 번짐, 반짝이 아이콘(✨) 추가 */}
                           {isNew(notice.date) && (
-                            <span className="bg-red-500 text-white text-[8px] px-1.5 py-0.5 rounded font-black animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.5)]">
-                              NEW
+                            <span className="bg-gradient-to-r from-rose-500 to-red-600 text-white text-[9px] px-1.5 py-0.5 rounded font-black animate-pulse shadow-[0_0_12px_rgba(239,68,68,0.8)] border border-red-400/80 tracking-widest flex items-center gap-0.5">
+                              NEW ✨
                             </span>
                           )}
                         </div>
@@ -161,7 +169,7 @@ export default async function Home() {
              <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
                 <div className="text-[150px] font-black text-blue-600">✝</div>
              </div>
-             <div className="relative z-10 flex flex-col gap-2">
+             <div className="relative z-10 flex flex-col gap-1">
                <StatusSection data={data} isMainPage={true} />
              </div>
           </div>

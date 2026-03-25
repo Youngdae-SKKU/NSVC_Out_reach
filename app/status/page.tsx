@@ -25,40 +25,47 @@ export default async function StatusPage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] font-sans pb-32">
-      <div className="max-w-4xl mx-auto px-5 pt-12">
+    <div className="min-h-screen bg-[#F8FAFC] font-sans pb-8">
+      <div className="max-w-4xl mx-auto px-3 pt-4">
         
         {/* 뒤로 가기 버튼 */}
-        <Link href="/" className="inline-flex items-center text-sm font-bold text-slate-400 hover:text-blue-600 transition-colors mb-8">
-          &larr; 메인 화면으로 돌아가기
+        <Link href="/" className="inline-flex items-center text-[11px] font-bold text-slate-400 hover:text-blue-600 transition-colors mb-3 group">
+          <span className="group-hover:-translate-x-1 transition-transform mr-1">&larr;</span> 메인 화면으로 돌아가기
         </Link>
 
         {/* 페이지 타이틀 */}
-        <h2 className="text-3xl font-black italic text-slate-800 flex items-center gap-3 mb-8">
-          <span className="bg-blue-600 text-white text-sm px-3 py-1.5 rounded-md not-italic tracking-wider shadow-sm">STATUS</span>
-          전체 등록 및 납부 현황
+        <h2 className="text-lg md:text-xl font-black italic text-slate-800 flex items-center gap-1.5 tracking-tight mb-3">
+          <span className="bg-blue-600 text-white text-[10px] px-1.5 py-0.5 rounded not-italic tracking-wider shadow-sm">STATUS</span>
+          전체 등록 현황
         </h2>
 
         {/* 메인 화이트 박스 */}
-        <div className="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-100">
+        <div className="bg-white rounded-xl p-3 md:p-4 shadow-sm border border-slate-100">
           
-          {/* 상단 통계 및 막대그래프 */}
-          <div className="mb-6 border-b border-slate-100 pb-10">
-            <div className="flex justify-between items-end mb-4 px-1">
-              <div className="flex items-baseline gap-2">
-                <span className="text-[4rem] leading-none font-black text-[#5B21B6] tracking-tighter drop-shadow-sm">
-                  {paidCount}
-                </span>
-                <span className="text-lg font-bold text-slate-500 mb-1">
-                  (완납 명수) / <span className="text-4xl font-black text-slate-700 mx-1.5">{total}</span> (신청 명수)
+          {/* 상단 통계 영역 */}
+          <div className="mb-2 border-b border-slate-100 pb-3">
+            <div className="flex justify-between items-end mb-2 px-1">
+              <div className="flex flex-col gap-0.5">
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-3xl md:text-4xl leading-none font-black text-[#5B21B6] tracking-tighter drop-shadow-sm">
+                    {paidCount}
+                  </span>
+                  <span className="text-slate-400 font-black text-lg">/</span>
+                  <span className="text-2xl md:text-3xl font-black text-slate-700 leading-none">
+                    {total}
+                  </span>
+                </div>
+                <span className="text-[10px] font-bold text-slate-500 pl-0.5">
+                  완납 인원 / 전체 신청 인원
                 </span>
               </div>
-              <div className="bg-[#EEF2FF] text-[#4F46E5] text-base font-black px-5 py-2.5 rounded-2xl mb-2 whitespace-nowrap shadow-sm">
+              
+              <div className="bg-[#EEF2FF] text-[#4F46E5] text-[11px] font-black px-2.5 py-1.5 rounded-lg mb-0.5 whitespace-nowrap shadow-sm">
                 {percentage}% 달성
               </div>
             </div>
             
-            <div className="relative w-full h-4 bg-slate-100 rounded-full mt-6 mb-2 shadow-inner">
+            <div className="relative w-full h-2.5 bg-slate-100 rounded-full mt-2 mb-1 shadow-inner">
               <div
                 className="absolute top-0 left-0 h-full bg-[#5B21B6] transition-all duration-1000 ease-out rounded-full"
                 style={{ width: `${percentage}%` }}
@@ -67,7 +74,7 @@ export default async function StatusPage() {
                 className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 z-20 transition-all duration-1000 ease-out"
                 style={{ left: `${percentage}%` }}
               >
-                <div className="text-[40px] drop-shadow-md">👦🏻</div>
+                <div className="text-[22px] drop-shadow-md">👦🏻</div>
               </div>
             </div>
           </div>
@@ -76,44 +83,44 @@ export default async function StatusPage() {
           {sortedStudents.length > 0 ? (
             <ul className="flex flex-col">
               {sortedStudents.map((student: any) => (
-                <li key={student.id} className="flex flex-col py-4 px-3 border-b border-slate-100 last:border-0 hover:bg-slate-50/50 transition-colors gap-1.5">
+                // 1줄로 구성
+                <li key={student.id} className="flex justify-between items-center py-2.5 px-1 border-b border-slate-100 last:border-0 hover:bg-slate-50/50 transition-colors w-full">
 
-                  <div className="flex justify-between items-center w-full flex-wrap gap-y-3">
+                  {/* 왼쪽: [학년/셀] + [이름] + [📅 신청일] */}
+                  <div className="flex items-center gap-2">
+                    <span className="w-[36px] text-center text-[9px] font-bold text-slate-600 bg-slate-100 py-0.5 rounded border border-slate-200 whitespace-nowrap shadow-sm shrink-0">
+                      {student.group || "미분류"}
+                    </span>
                     
-                    {/* 왼쪽: [학년/셀(크기 고정)] + [이름] + [신청일] */}
-                    <div className="flex items-center gap-3">
-                      <span className="w-14 text-center text-[13px] font-black text-slate-700 bg-slate-100 py-1.5 rounded-md border border-slate-200 whitespace-nowrap shadow-sm shrink-0">
-                        {student.group || "미분류"}
-                      </span>
-                      <span className="text-lg font-black text-slate-800 tracking-tight shrink-0">
-                        {maskName(student.name)}
-                      </span>
-                      <span className="text-lg text-slate-500 font-medium ml-1 whitespace-nowrap">
-                        🗓️ 신청일: {student.applyDate}
-                      </span>
-                    </div>
+                    {/* 이름 (자간 넓힘 유지) */}
+                    <span className="text-[13px] font-black text-slate-800 tracking-widest shrink-0">
+                      {maskName(student.name)}
+                    </span>
+                    
+                    {/* 🚀 신청일: 아이콘 추가 & 크기를 text-[10px]로 키움 */}
+                    <span className="text-[10px] text-slate-400 font-medium whitespace-nowrap ml-1 flex items-center gap-0.5">
+                      📅 {student.applyDate}
+                    </span>
+                  </div>
 
-                    {/* 오른쪽: [납입액 텍스트 + 금액] + [완납/미납(크기 고정)] */}
-                    <div className="flex items-center gap-3 ml-auto">
-                      <span className="text-base font-bold text-slate-800 text-right whitespace-nowrap">
-                        <span className="text-sm font-medium text-slate-500 mr-2">납입액</span>
-                        {student.amount?.toLocaleString() || 0}원
-                      </span>
-                      
-                      {student.isPaid ? (
-                        <span className="bg-green-100 text-green-600 text-[11px] font-black w-[42px] text-center py-1.5 rounded-full shadow-sm shrink-0">완납</span>
-                      ) : (
-                        <span className="bg-red-100 text-red-500 text-[11px] font-black w-[42px] text-center py-1.5 rounded-full shadow-sm shrink-0">미납</span>
-                      )}
-                    </div>
-
+                  {/* 오른쪽: [납입액] + [완납/미납 배지] */}
+                  <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                    <span className="text-[11px] font-bold text-slate-800 text-right whitespace-nowrap">
+                      {student.amount?.toLocaleString() || 0}원
+                    </span>
+                    
+                    {student.isPaid ? (
+                      <span className="bg-green-100 text-green-700 text-[9px] font-black w-[32px] text-center py-0.5 rounded shadow-sm shrink-0">완납</span>
+                    ) : (
+                      <span className="bg-rose-100 text-rose-600 text-[9px] font-black w-[32px] text-center py-0.5 rounded shadow-sm shrink-0">미납</span>
+                    )}
                   </div>
 
                 </li>
               ))}
             </ul>
           ) : (
-            <div className="text-center py-10 text-sm text-slate-400 font-bold">
+            <div className="text-center py-6 text-[11px] text-slate-400 font-bold">
               아직 등록된 인원이 없습니다. 😊
             </div>
           )}
