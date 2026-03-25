@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import Gallery from './Gallery'; // 방금 만든 Gallery 컴포넌트를 불러옵니다.
+import Gallery from './Gallery';
 
-// 컴퓨터의 폴더를 뒤져서 사진 파일 이름들을 자동으로 긁어오는 로봇 함수
+// 🚀 서버에서 사진 폴더를 읽어오는 로봇 함수
 function getImagesFromDir(subDir: string) {
   const dirPath = path.join(process.cwd(), 'public/images/archive', subDir);
   
@@ -16,10 +16,10 @@ function getImagesFromDir(subDir: string) {
 }
 
 export default function ArchivePage() {
-  // 서버가 알아서 vol1, vol2 폴더 안의 모든 사진을 읽어옵니다. (선생님이 이름 적을 필요 없음!)
+  // 서버가 알아서 vol1, vol2 폴더 안의 모든 사진을 읽어옵니다.
   const firstOutreach = getImagesFromDir('vol1');
   const secondOutreach = getImagesFromDir('vol2');
 
-  // 찾아온 사진 목록을 화면 그리는 파일(Gallery)로 넘겨줍니다.
+  // 🎨 실제 화려한 디자인과 애니메이션은 Gallery.tsx 파일로 넘겨서 그립니다!
   return <Gallery firstOutreach={firstOutreach} secondOutreach={secondOutreach} />;
 }
