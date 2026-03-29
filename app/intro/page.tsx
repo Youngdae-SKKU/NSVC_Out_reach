@@ -24,37 +24,42 @@ export default function IntroPage() {
     }
   ];
 
+  // 🚀 새롭게 전달해주신 일정으로 업데이트 되었습니다!
   const schedule = [
     {
       day: "DAY 1. 설레는 만남",
       date: "8/5 (수)",
       items: [
-        { time: "14:00", task: "교회 집결 및 이동", color: "text-slate-600" },
-        { time: "19:30", task: "저녁 집회 I : '부르심'", color: "text-rose-600 font-black" },
+        { time: "09:20", task: "제주도 이동", color: "text-slate-600" },
+        { time: "14:00", task: "공동체활동", color: "text-blue-600 font-black" },
+        { time: "19:00", task: "저녁집회", color: "text-rose-600 font-black" },
       ]
     },
     {
       day: "DAY 2. 깊어지는 교제",
       date: "8/6 (목)",
       items: [
-        { time: "14:00", task: "워터 페스티벌 & 게임", color: "text-sky-500 font-black" },
-        { time: "19:30", task: "저녁 집회 II : '회복'", color: "text-rose-600 font-black" },
+        { time: "09:00", task: "교회선교지 방문", color: "text-slate-600" },
+        { time: "14:00", task: "공동체활동", color: "text-blue-600 font-black" },
+        { time: "19:00", task: "저녁집회", color: "text-rose-600 font-black" },
       ]
     },
     {
       day: "DAY 3. 하나되는 우리",
       date: "8/7 (금)",
       items: [
-        { time: "10:00", task: "아웃도어 미션 투어", color: "text-amber-600 font-black" },
-        { time: "19:30", task: "성령 대망회 & 기도회", color: "text-rose-600 font-black" },
+        { time: "09:00", task: "교회방문", color: "text-slate-600" },
+        { time: "11:00", task: "전도프로그램", color: "text-amber-600 font-black" },
+        { time: "15:00", task: "공동체활동", color: "text-blue-600 font-black" },
+        { time: "19:00", task: "저녁집회", color: "text-rose-600 font-black" },
       ]
     },
     {
       day: "DAY 4. 새로운 파송",
       date: "8/8 (토)",
       items: [
-        { time: "10:00", task: "파송 예배 및 간증", color: "text-indigo-600 font-black" },
-        { time: "13:00", task: "사진 촬영 및 귀가", color: "text-slate-600" },
+        { time: "09:00", task: "공동체활동", color: "text-blue-600 font-black" },
+        { time: "14:00", task: "교회 복귀", color: "text-indigo-600 font-black" },
       ]
     }
   ];
