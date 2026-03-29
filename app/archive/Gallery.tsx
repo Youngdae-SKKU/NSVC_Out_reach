@@ -45,8 +45,8 @@ export default function Gallery({ firstOutreach, secondOutreach }: GalleryProps)
 
         {/* 📸 1차 아웃리치 */}
         <Section 
-          title="1회\n2021년" 
-          subtitle="첫 번째 발걸음, 시작의 은혜" 
+          title="1회\n2019년" 
+          subtitle="08.07 ~ 08.10 : 첫 번째 발걸음, 시작의 은혜" 
           images={firstOutreach} 
           badgeColor="bg-rose-600" 
           onImageClick={setSelectedImg} 
