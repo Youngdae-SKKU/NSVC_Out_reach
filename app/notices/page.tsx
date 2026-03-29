@@ -65,14 +65,13 @@ export default async function NoticesPage() {
                   
                   <div className="flex items-start gap-3 w-full">
                     
-                    {/* 🚀 카테고리 배지 크기 축소 (w-16 h-14 -> w-12 h-10, text-sm -> text-xs) */}
+                    {/* 카테고리 배지 */}
                     <div className="flex-shrink-0 w-12 h-10 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 font-black text-xs border border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white transition-colors px-1 text-center break-keep shadow-sm">
                       {notice.author || "교회"}
                     </div>
                     
                     {/* 텍스트 컨테이너 */}
                     <div className="flex flex-col flex-1">
-                      {/* 🚀 NEW 배지 영역 여백 축소 (mb-1.5 -> mb-1) */}
                       <div className="flex items-center gap-1.5 mb-1">
                         {isNewNotice(notice.date) && (
                           <span className="bg-red-500 text-white text-[9px] px-1.5 py-0.5 rounded font-black animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.4)]">
@@ -86,12 +85,11 @@ export default async function NoticesPage() {
                         )}
                       </div>
                       
-                      {/* 🚀 본문 글자 크기 및 줄간격 축소 (text-sm, leading-snug) */}
-                      <span className="text-sm font-bold text-slate-800 group-hover:text-indigo-600 transition-colors leading-snug break-keep">
+                      {/* 🚀 수정 포인트: 단어 끊김 방지 및 양쪽 정렬 적용 (span -> p 태그 변경, text-justify, leading-relaxed 추가) */}
+                      <p className="text-sm font-bold text-slate-800 group-hover:text-indigo-600 transition-colors leading-relaxed break-keep text-justify">
                         {notice.title}
-                      </span>
+                      </p>
                       
-                      {/* 🚀 날짜 글자 크기 및 여백 축소 (text-xs -> text-[11px], mt-2.5 -> mt-1) */}
                       <div className="text-[11px] text-slate-400 mt-1 font-medium flex items-center gap-1.5">
                         <span>📅 게시일: {notice.date || "날짜 미상"}</span>
                       </div>
