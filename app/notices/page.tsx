@@ -85,8 +85,8 @@ export default async function NoticesPage() {
                         )}
                       </div>
                       
-                      {/* 🚀 수정 포인트: 단어 끊김 방지 및 양쪽 정렬 적용 (span -> p 태그 변경, text-justify, leading-relaxed 추가) */}
-                      <p className="text-sm font-bold text-slate-800 group-hover:text-indigo-600 transition-colors leading-relaxed break-keep text-justify">
+                      {/* 🚀 수정 포인트: leading-relaxed를 leading-snug로 변경하여 메인 화면과 줄 간격 통일! */}
+                      <p className="text-sm font-bold text-slate-800 group-hover:text-indigo-600 transition-colors leading-snug">
                         {notice.title}
                       </p>
                       
