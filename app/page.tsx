@@ -45,8 +45,9 @@ export default async function Home() {
   const data = await getPaymentStatus();
   const allNotices = await getNotices();
   
-  // 최신순 정렬 후 3개만 추출
+  // 🚀 최신순 정렬 후 3개만 추출 (여기에 노출여부 필터링 추가!)
   const recentNotices = [...allNotices]
+    .filter((notice: any) => notice.isVisible !== false) // 노출여부 체크 안 된 글 숨기기
     .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 3); 
   
@@ -134,12 +135,17 @@ export default async function Home() {
               {recentNotices.length > 0 ? (
                 recentNotices.map((notice: any) => {
                   const style = getNoticeStyle(notice.note, notice.title);
+                  
+                  // 🚀 글자가 80자를 넘거나 줄바꿈(\n)이 포함되어 있다면 '긴 글'로 판별합니다.
+                  const isLongText = notice.title && (notice.title.length > 80 || notice.title.includes('\n'));
+
                   return (
-                    // 🚀 수정 포인트 1: div 태그를 Link 태그로 변경하여 박스 전체 클릭 시 공지사항 페이지로 이동하게 했습니다.
-                    <Link href="/notices" key={notice.id} className="flex items-start p-3 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 hover:shadow-md transition-all cursor-pointer group">
+                    // Link 태그를 div로 변경 (내부에서 버튼을 클릭해야 하므로)
+                    <div key={notice.id} className="flex items-start p-3 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all group">
                       <div className={`w-14 h-10 shrink-0 rounded-xl flex items-center justify-center text-[11px] font-black ${style.bg} ${style.color} border ${style.border} shadow-inner mt-0.5 px-1 text-center break-keep`}>
                         {notice.author || "교회"}
                       </div>
+                      
                       <div className="flex flex-col flex-1 ml-3 overflow-hidden">
                         <div className="flex items-center gap-1 mb-0.5">
                           {isNew(notice.date) && (
@@ -148,15 +154,34 @@ export default async function Home() {
                             </span>
                           )}
                         </div>
-                        {/* 🚀 수정 포인트 2: line-clamp-3 클래스를 추가하여 최대 3줄까지만 보이고 '...' 으로 잘리게 만들었습니다. */}
-                        <h4 className="text-[14px] font-bold text-slate-800 group-hover:text-indigo-600 transition-colors leading-snug line-clamp-3">
-                          {notice.title}
-                        </h4>
+                        
+                        {/* 🚀 전체글 보기 기능 구현 (CSS 체크박스 트릭 활용) */}
+                        {isLongText ? (
+                          <div className="relative w-full">
+                            <input type="checkbox" id={`main-notice-${notice.id}`} className="peer hidden" />
+                            
+                            <h4 className="text-[14px] font-bold text-slate-800 leading-snug whitespace-pre-wrap line-clamp-3 peer-checked:line-clamp-none transition-all">
+                              {notice.title}
+                            </h4>
+                            
+                            <label htmlFor={`main-notice-${notice.id}`} className="inline-block mt-1.5 text-[11px] font-black text-indigo-500 cursor-pointer peer-checked:hidden hover:text-indigo-700 transition-colors">
+                              전체글 보기 ▾
+                            </label>
+                            <label htmlFor={`main-notice-${notice.id}`} className="hidden mt-1.5 text-[11px] font-black text-slate-400 cursor-pointer peer-checked:inline-block hover:text-slate-600 transition-colors">
+                              접기 ▴
+                            </label>
+                          </div>
+                        ) : (
+                          <h4 className="text-[14px] font-bold text-slate-800 leading-snug whitespace-pre-wrap">
+                            {notice.title}
+                          </h4>
+                        )}
+
                         <div className="text-xs text-slate-500 font-medium mt-1 flex items-center gap-1.5">
                           <span>📅 {notice.date}</span>
                         </div>
                       </div>
-                    </Link>
+                    </div>
                   );
                 })
               ) : (
