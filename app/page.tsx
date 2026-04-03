@@ -45,9 +45,9 @@ export default async function Home() {
   const data = await getPaymentStatus();
   const allNotices = await getNotices();
   
-  // 🚀 최신순 정렬 후 3개만 추출 (여기에 노출여부 필터링 추가!)
+  // 🚀 메인 페이지 노출여부 필터링 완벽 적용
   const recentNotices = [...allNotices]
-    .filter((notice: any) => notice.isVisible !== false) // 노출여부 체크 안 된 글 숨기기
+    .filter((notice: any) => notice.isVisible !== false) 
     .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 3); 
   
@@ -135,12 +135,9 @@ export default async function Home() {
               {recentNotices.length > 0 ? (
                 recentNotices.map((notice: any) => {
                   const style = getNoticeStyle(notice.note, notice.title);
-                  
-                  // 🚀 글자가 80자를 넘거나 줄바꿈(\n)이 포함되어 있다면 '긴 글'로 판별합니다.
                   const isLongText = notice.title && (notice.title.length > 80 || notice.title.includes('\n'));
 
                   return (
-                    // Link 태그를 div로 변경 (내부에서 버튼을 클릭해야 하므로)
                     <div key={notice.id} className="flex items-start p-3 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all group">
                       <div className={`w-14 h-10 shrink-0 rounded-xl flex items-center justify-center text-[11px] font-black ${style.bg} ${style.color} border ${style.border} shadow-inner mt-0.5 px-1 text-center break-keep`}>
                         {notice.author || "교회"}
@@ -155,12 +152,15 @@ export default async function Home() {
                           )}
                         </div>
                         
-                        {/* 🚀 전체글 보기 기능 구현 (CSS 체크박스 트릭 활용) */}
+                        {/* 🚀 메인 페이지도 글자 잘림 방지 똑같이 적용! */}
                         {isLongText ? (
                           <div className="relative w-full">
                             <input type="checkbox" id={`main-notice-${notice.id}`} className="peer hidden" />
                             
-                            <h4 className="text-[14px] font-bold text-slate-800 leading-snug whitespace-pre-wrap line-clamp-3 peer-checked:line-clamp-none transition-all">
+                            <h4 className="text-[14px] font-bold text-slate-800 leading-snug whitespace-pre-wrap line-clamp-3 peer-checked:hidden transition-all">
+                              {notice.title}
+                            </h4>
+                            <h4 className="hidden text-[14px] font-bold text-slate-800 leading-snug whitespace-pre-wrap peer-checked:block transition-all">
                               {notice.title}
                             </h4>
                             

@@ -29,7 +29,7 @@ export default async function NoticesPage() {
     allNotices = [];
   }
 
-  // ✅ 3. 필터링 및 정렬 (노출여부 false인 것은 여기서 걸러집니다)
+  // ✅ 3. 노출여부 필터링 및 최신순 정렬
   const sortedNotices = allNotices
     .filter((notice: any) => notice.isVisible !== false) 
     .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -53,7 +53,6 @@ export default async function NoticesPage() {
           {sortedNotices.length > 0 ? (
             <ul className="divide-y divide-slate-100">
               {sortedNotices.map((notice: any) => {
-                // 🚀 글자가 80자를 넘거나 줄바꿈(\n)이 포함되어 있다면 '긴 글'로 판별합니다.
                 const isLongText = notice.title && (notice.title.length > 80 || notice.title.includes('\n'));
 
                 return (
@@ -78,18 +77,21 @@ export default async function NoticesPage() {
                           )}
                         </div>
                         
-                        {/* 🚀 긴 글일 경우: 체크박스 트릭을 이용해 '전체글 보기' 기능 활성화 */}
+                        {/* 🚀 글자 잘림 방지: 아예 "짧은 버전"과 "긴 버전" 두 개를 만들어서 교체합니다! */}
                         {isLongText ? (
                           <div className="relative w-full">
-                            {/* 숨겨진 체크박스 (이게 체크되면 아래 글씨가 쫙 펴집니다) */}
                             <input type="checkbox" id={`notice-${notice.id}`} className="peer hidden" />
                             
-                            {/* whitespace-pre-wrap으로 줄바꿈 살림 + peer-checked로 줄수 제한 해제 */}
-                            <p className="text-sm font-bold text-slate-800 group-hover:text-indigo-900 transition-colors leading-snug whitespace-pre-wrap line-clamp-3 peer-checked:line-clamp-none">
+                            {/* 닫혀있을 때 (3줄 제한) */}
+                            <p className="text-sm font-bold text-slate-800 group-hover:text-indigo-900 transition-colors leading-snug whitespace-pre-wrap line-clamp-3 peer-checked:hidden">
                               {notice.title}
                             </p>
                             
-                            {/* 전체보기 / 접기 버튼 */}
+                            {/* 열려있을 때 (제한 없음) */}
+                            <p className="hidden text-sm font-bold text-slate-800 group-hover:text-indigo-900 transition-colors leading-snug whitespace-pre-wrap peer-checked:block">
+                              {notice.title}
+                            </p>
+                            
                             <label htmlFor={`notice-${notice.id}`} className="inline-block mt-2 text-[11px] font-black text-indigo-500 bg-indigo-50 border border-indigo-100 px-2 py-1 rounded cursor-pointer peer-checked:hidden hover:bg-indigo-100 transition-colors">
                               전체글 보기 ▾
                             </label>
@@ -98,7 +100,6 @@ export default async function NoticesPage() {
                             </label>
                           </div>
                         ) : (
-                          /* 🚀 짧은 글일 경우: 그냥 줄바꿈만 살려서 보여줌 */
                           <p className="text-sm font-bold text-slate-800 group-hover:text-indigo-600 transition-colors leading-snug whitespace-pre-wrap">
                             {notice.title}
                           </p>
@@ -108,7 +109,6 @@ export default async function NoticesPage() {
                           <span>📅 게시일: {notice.date || "날짜 미상"}</span>
                         </div>
                       </div>
-
                     </div>
                   </li>
                 );
