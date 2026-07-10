@@ -3,12 +3,35 @@
 import { useState } from "react";
 import Link from "next/link";
 
+// 사역 목표 key 타입
+type GoalKey = "spiritual" | "community" | "mission" | "calling";
+
+// 프로그램 항목 타입
+type Program = {
+  name: string;
+  when: string;
+  place: string;
+  why: string;
+};
+
+// 목표 카드 타입
+type Goal = {
+  key: GoalKey;
+  title: string;
+  emoji: string;
+  color: string;
+  ring: string;
+  desc: string;
+  note?: string;
+  programs: Program[];
+};
+
 export default function IntroPage() {
-  // 선택된 사역 목표 key ('spiritual' | 'community' | 'mission' | 'calling' | null)
-  const [active, setActive] = useState(null);
+  // 선택된 사역 목표 key (없으면 null)
+  const [active, setActive] = useState<GoalKey | null>(null);
 
   // PART 02 표에서 선택된 목표에 해당하는 칸을 강조하는 헬퍼
-  const hl = (key) =>
+  const hl = (key: GoalKey) =>
     active === key
       ? " relative z-20 outline outline-[3px] -outline-offset-2 outline-rose-500 "
       : "";
@@ -21,7 +44,7 @@ export default function IntroPage() {
   // ▼ PART 01 사역 목표(방향 B, 4카드) + 목표별 연결 프로그램
   //   programs의 날짜·시간은 PART 02 표(일정_0710.jpg, 정시 단위)에서 직접 산출한 값.
   //   why/desc 문구는 아웃리치 취지문 원문 표현에서 도출.
-  const goals = [
+  const goals: Goal[] = [
     {
       key: "spiritual",
       title: "영적 성장",
@@ -82,14 +105,14 @@ export default function IntroPage() {
   ];
 
   // 카드 아래에 렌더링할 상세 패널
-  const DetailPanel = ({ goal }) => (
+  const DetailPanel = ({ goal }: { goal: Goal }) => (
     <div className="mt-2 rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
       <div className={`flex items-center gap-2 px-4 py-3 ${goal.color}`}>
         <span className="text-lg">{goal.emoji}</span>
         <h3 className="text-sm font-black">{goal.title} · 연결 프로그램</h3>
       </div>
       <div className="p-3 space-y-2">
-        {goal.programs.map((p, i) => (
+        {goal.programs.map((p: Program, i: number) => (
           <div key={i} className="rounded-xl border border-slate-100 bg-slate-50/60 p-3">
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
               <span className="text-[13px] font-black text-slate-800">{p.name}</span>
@@ -143,7 +166,7 @@ export default function IntroPage() {
 
           {/* 카드 + (선택 시) 바로 아래 상세 패널 */}
           <div className="grid gap-2">
-            {goals.map((goal) => {
+            {goals.map((goal: Goal) => {
               const isActive = active === goal.key;
               return (
                 <div key={goal.key}>
