@@ -1,179 +1,347 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 
 export default function IntroPage() {
+  // 선택된 사역 목표 key ('spiritual' | 'community' | 'mission' | 'calling' | null)
+  const [active, setActive] = useState(null);
+
+  // PART 02 표에서 선택된 목표에 해당하는 칸을 강조하는 헬퍼
+  const hl = (key) =>
+    active === key
+      ? " relative z-20 outline outline-[3px] -outline-offset-2 outline-rose-500 "
+      : "";
+
+  // 시간(맨 왼쪽) 셀 공통 스타일
+  const T = "border border-slate-400 py-2.5 font-black text-[12px] bg-[#EDE7F6]";
+  // 일반 셀 테두리 공통
+  const B = "border border-slate-400";
+
+  // ▼ PART 01 사역 목표(방향 B, 4카드) + 목표별 연결 프로그램
+  //   programs의 날짜·시간은 PART 02 표(일정_0710.jpg, 정시 단위)에서 직접 산출한 값.
+  //   why/desc 문구는 아웃리치 취지문 원문 표현에서 도출.
   const goals = [
     {
+      key: "spiritual",
       title: "영적 성장",
       emoji: "🌱",
       color: "bg-blue-50 text-blue-600",
-      desc: "매일 아침 큐티와 집회를 통해 하나님을 인격적으로 만나고 삶의 주인을 고백합니다."
+      ring: "ring-blue-400",
+      desc: "매일 아침 큐티와 집회로 하나님을 인격적으로 만나고 ‘하나님의 자녀’라는 정체성을 세웁니다.",
+      programs: [
+        { name: "방별 말씀 나눔", when: "8/6(목)·8/7(금) 07:00~08:00", place: "", why: "전날 주신 말씀을 함께 나누며 하루를 시작 — 스스로 신앙을 지키는 영적 습관 형성" },
+        { name: "예배 및 기도회 1", when: "8/5(수) 19:00~22:00", place: "", why: "하나님을 인격적으로 만나 정체성을 세우는 핵심 시간" },
+        { name: "예배 및 기도회 2", when: "8/6(목) 19:00~22:00", place: "", why: "말씀 앞에서 소명과 정체성을 깊이 확인" },
+        { name: "예배 및 기도회 3", when: "8/7(금) 19:00~23:00", place: "", why: "마지막 밤, 결단과 헌신으로 나아가는 시간" },
+      ],
     },
     {
+      key: "community",
       title: "공동체 연합",
       emoji: "🤝",
       color: "bg-purple-50 text-purple-600",
-      desc: "조별 미션과 게임을 통해 서로의 다름을 인정하고 그리스도 안에서 하나 됨을 경험합니다."
+      ring: "ring-purple-400",
+      desc: "미디어에서 벗어나 동역자·선생님과 소통하며 서로의 강점을 격려하는 ‘한 몸’ 공동체를 경험합니다.",
+      programs: [
+        { name: "연합 1", when: "8/5(수) 14:00~16:00", place: "알프스 제주점", why: "함께 활동하며 서로의 다름을 인정하고 하나 됨을 경험" },
+        { name: "연합 2", when: "8/5(수) 16:00~18:00", place: "다이나믹 메이즈", why: "협력 미션을 통해 관계성을 세움" },
+        { name: "연합 3", when: "8/6(목) 16:00~18:00", place: "런닝맨", why: "게임·미션으로 서로의 강점을 격려" },
+        { name: "연합 4", when: "8/7(금) 14:00~16:00", place: "퐁당제주", why: "공동 체험으로 ‘한 몸’ 공동체를 다짐" },
+        { name: "하나됨", when: "8/7(금) 16:00~18:00", place: "곽지 해수욕장", why: "자연 속 공동 활동으로 공동체가 하나 되는 체험" },
+        { name: "간식으로 화합과 나눔", when: "8/5(수)·8/6(목) 22:00~23:00", place: "", why: "하루를 마무리하며 나누는 교제 — 관계성 형성" },
+      ],
     },
     {
+      key: "mission",
+      title: "선교적 실천",
+      emoji: "🧭",
+      color: "bg-emerald-50 text-emerald-600",
+      ring: "ring-emerald-400",
+      desc: "제주 선교지와 기독교 역사를 탐방하며 ‘내가 선 모든 곳이 선교지’임을 깨닫고 복음의 증인으로 살아갑니다.",
+      programs: [
+        { name: "선교지 탐방 1", when: "8/6(목) 11:00~12:00", place: "모슬포교회", why: "제주 기독교 역사의 현장을 직접 돌아봄" },
+        { name: "선교지 탐방 2", when: "8/6(목) 12:00~13:00", place: "이기풍 선교기념관", why: "선교사의 삶을 통해 부르심과 헌신을 배움" },
+        { name: "선교지 탐방 3", when: "8/6(목) 14:00~16:00", place: "강병대 교회", why: "믿음의 유산을 이어받아 ‘내가 선 곳이 선교지’임을 자각" },
+        { name: "전도", when: "8/7(금) 09:00~11:00", place: "만장굴", why: "복음의 증인 된 삶을 현장에서 직접 연습" },
+      ],
+    },
+    {
+      key: "calling",
       title: "소명 발견",
       emoji: "🚀",
       color: "bg-amber-50 text-amber-600",
-      desc: "세상을 향한 하나님의 비전을 찾고 나의 꿈을 설계하는 시간입니다."
-    }
+      ring: "ring-amber-400",
+      desc: "나를 향한 하나님의 부르심을 확인하고 고유한 은사(달란트)를 발견해 세상을 향한 비전을 설계합니다.",
+      note: "일정상 별도 ‘비전 세션’은 없습니다. 취지문의 ‘창조 세계·역사 체험 → 감사·은사(달란트) 발견’ 흐름에 따라 제주 체험을 연결했으며, 소명은 예배·기도회를 통해서도 함께 형성됩니다.",
+      programs: [
+        { name: "제주 체험 1", when: "8/6(목) 09:00~11:00", place: "스카이 워터쇼", why: "창조 세계를 체험하며 감사를 회복하고 자신의 은사를 돌아봄" },
+        { name: "제주 체험 2", when: "8/7(금) 11:00~12:00", place: "국립제주박물관", why: "역사와 문화를 배우며 세상을 향한 비전을 구체화" },
+      ],
+    },
   ];
 
-  // 🚀 새롭게 전달해주신 상세 세부 일정표로 완벽하게 업데이트되었습니다!
-  const schedule = [
-    {
-      day: "DAY 1. 설레는 만남",
-      date: "8/5 (수)",
-      items: [
-        { time: "05:00", task: "집결 및 기도", color: "text-slate-600" },
-        { time: "06:00", task: "공항 출발 및 수속", color: "text-slate-600" },
-        { time: "09:20", task: "비행기 이동", color: "text-slate-600" },
-        { time: "12:00", task: "중식 (고사리맛집)", color: "text-slate-500" },
-        { time: "14:00", task: "연합 1 (알프스 제주)", color: "text-blue-600 font-black" },
-        { time: "17:00", task: "연합 2 (다이나믹 메이즈)", color: "text-blue-600 font-black" },
-        { time: "18:00", task: "숙소 석식", color: "text-slate-500" },
-        { time: "20:00", task: "예배 및 기도회 1", color: "text-rose-600 font-black" },
-        { time: "22:00", task: "간식 및 화합", color: "text-slate-600" },
-      ]
-    },
-    {
-      day: "DAY 2. 깊어지는 교제",
-      date: "8/6 (목)",
-      items: [
-        { time: "06:30", task: "기상 및 말씀 나눔", color: "text-rose-600 font-bold" },
-        { time: "09:00", task: "제주 체험 1 (스카이워터쇼)", color: "text-blue-600 font-black" },
-        { time: "11:00", task: "선교지 탐방 (모슬포/이기풍)", color: "text-amber-600 font-black" },
-        { time: "13:00", task: "중식 (그때 그 집)", color: "text-slate-500" },
-        { time: "15:00", task: "선교지 탐방 3 (강병대교회)", color: "text-amber-600 font-black" },
-        { time: "17:00", task: "연합 3 (런닝맨)", color: "text-blue-600 font-black" },
-        { time: "18:00", task: "숙소 석식", color: "text-slate-500" },
-        { time: "20:00", task: "예배 및 기도회 2", color: "text-rose-600 font-black" },
-      ]
-    },
-    {
-      day: "DAY 3. 하나되는 우리",
-      date: "8/7 (금)",
-      items: [
-        { time: "06:30", task: "기상 및 말씀 나눔", color: "text-rose-600 font-bold" },
-        { time: "09:00", task: "전도 (만장굴)", color: "text-amber-600 font-black" },
-        { time: "11:00", task: "제주 체험 2 (국립제주박물관)", color: "text-blue-600 font-black" },
-        { time: "12:00", task: "중식 (명륜진사 삼화점)", color: "text-slate-500" },
-        { time: "14:00", task: "연합 4 (퐁당제주)", color: "text-blue-600 font-black" },
-        { time: "17:00", task: "하나됨 (곽지 해수욕장)", color: "text-blue-600 font-black" },
-        { time: "18:00", task: "숙소 석식", color: "text-slate-500" },
-        { time: "19:00", task: "예배 및 기도회 3", color: "text-rose-600 font-black" },
-      ]
-    },
-    {
-      day: "DAY 4. 새로운 파송",
-      date: "8/8 (토)",
-      items: [
-        { time: "07:30", task: "기상 및 조식", color: "text-slate-600" },
-        { time: "09:00", task: "정리 및 퇴실", color: "text-slate-600" },
-        { time: "10:00", task: "공항으로 출발", color: "text-slate-600" },
-        { time: "12:00", task: "중식 및 탑승 수속", color: "text-slate-500" },
-        { time: "13:45", task: "비행기 이동", color: "text-slate-600" },
-        { time: "15:00", task: "교회 복귀 및 해산", color: "text-indigo-600 font-black" },
-      ]
-    }
-  ];
+  // 카드 아래에 렌더링할 상세 패널
+  const DetailPanel = ({ goal }) => (
+    <div className="mt-2 rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+      <div className={`flex items-center gap-2 px-4 py-3 ${goal.color}`}>
+        <span className="text-lg">{goal.emoji}</span>
+        <h3 className="text-sm font-black">{goal.title} · 연결 프로그램</h3>
+      </div>
+      <div className="p-3 space-y-2">
+        {goal.programs.map((p, i) => (
+          <div key={i} className="rounded-xl border border-slate-100 bg-slate-50/60 p-3">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+              <span className="text-[13px] font-black text-slate-800">{p.name}</span>
+              {p.place && (
+                <span className="text-[10px] font-bold text-slate-500 bg-white border border-slate-200 rounded px-1.5 py-0.5">
+                  {p.place}
+                </span>
+              )}
+              <span className="text-[10px] font-bold text-rose-500 ml-auto">{p.when}</span>
+            </div>
+            <p className="text-[11px] text-slate-500 font-medium leading-snug break-keep mt-1">{p.why}</p>
+          </div>
+        ))}
+        {goal.note && (
+          <p className="text-[10px] text-slate-400 font-medium leading-snug break-keep px-1 pt-1">
+            ※ {goal.note}
+          </p>
+        )}
+        <p className="text-[10px] text-indigo-500 font-bold px-1 pt-1">
+          아래 상세 프로그램 표에서 해당 칸이 <span className="text-rose-500">빨간 테두리</span>로 강조됩니다.
+        </p>
+      </div>
+    </div>
+  );
 
   return (
-    <div className="min-h-screen bg-white pb-12 font-sans text-slate-900">
+    <div className="min-h-screen bg-[#F8FAFC] pb-12 font-sans text-slate-900">
       
+      {/* 🚀 상단 헤더 영역 */}
       <div className="relative h-[80px] flex items-center justify-center overflow-hidden bg-gradient-to-r from-blue-600 to-indigo-500 rounded-b-[30px] shadow-sm">
         <Link href="/" className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-md z-30">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
         </Link>
-        
         <div className="relative z-10 text-center">
           <span className="text-[9px] font-black text-white/70 tracking-widest uppercase block mb-0.5">2026 JEJU OUTREACH</span>
           <h1 className="text-xl md:text-2xl font-black text-white italic tracking-tighter">2026 아웃리치 여정</h1>
         </div>
       </div>
 
-      <div className="max-w-xl mx-auto px-5 mt-4 space-y-5">
+      <div className="max-w-3xl mx-auto px-4 mt-5 space-y-6">
         
-        {/* 1. 일정 및 장소 */}
-        <section className="animate-in fade-in slide-in-from-bottom-2 duration-500">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="bg-indigo-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded italic shadow-sm">PART 01</span>
-            <h2 className="text-lg font-black italic">일정 및 장소</h2>
+        {/* 1. 사역 목표 섹션 */}
+        <section className="space-y-2">
+          <div className="flex items-center justify-between mb-1">
+            <div className="flex items-center gap-2">
+              <span className="bg-indigo-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded italic">PART 01</span>
+              <h2 className="text-lg font-black italic">사역 목표</h2>
+            </div>
+            <span className="text-[10px] text-indigo-500 font-bold">카드를 눌러 관련 프로그램 보기 👆</span>
+          </div>
+
+          {/* 카드 + (선택 시) 바로 아래 상세 패널 */}
+          <div className="grid gap-2">
+            {goals.map((goal) => {
+              const isActive = active === goal.key;
+              return (
+                <div key={goal.key}>
+                  <button
+                    type="button"
+                    onClick={() => setActive(isActive ? null : goal.key)}
+                    aria-expanded={isActive}
+                    className={`w-full text-left flex items-center gap-3 p-3 rounded-2xl border bg-white shadow-sm transition-all
+                      ${isActive
+                        ? `border-transparent ring-2 ${goal.ring} shadow-md`
+                        : "border-slate-100 hover:border-slate-200 hover:shadow"}`}
+                  >
+                    <div className={`shrink-0 w-10 h-10 ${goal.color} rounded-lg flex items-center justify-center text-xl`}>{goal.emoji}</div>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-sm font-black flex items-center gap-1.5">
+                        {goal.title}
+                        <span className="text-[9px] font-bold text-slate-400">· 프로그램 {goal.programs.length}</span>
+                      </h3>
+                      <p className="text-slate-500 text-[11px] leading-tight break-keep font-medium mt-0.5">{goal.desc}</p>
+                    </div>
+                    <svg
+                      width="16" height="16" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"
+                      className={`shrink-0 text-slate-300 transition-transform ${isActive ? "rotate-180 text-slate-500" : ""}`}
+                    >
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
+                  </button>
+
+                  {/* 클릭한 카드 바로 아래에 상세 패널 표시 */}
+                  {isActive && <DetailPanel goal={goal} />}
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* 2. 상세 프로그램 섹션 — 일정_0710.jpg 이미지 기준(정시 단위) */}
+        <section className="space-y-2">
+          <div className="flex justify-between items-end mb-2">
+            <div className="flex items-center gap-2">
+              <span className="bg-indigo-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded italic shadow-sm">PART 02</span>
+              <h2 className="text-lg font-black italic">상세 프로그램</h2>
+            </div>
+            <span className="text-[10px] text-rose-500 font-bold animate-pulse">
+              표를 좌우로 밀어보세요 👉
+            </span>
           </div>
           
-          <div className="rounded-[1.5rem] bg-[#0F172A] p-3 md:p-4 text-white shadow-xl border border-slate-800">
-            <div className="space-y-2">
-              <div>
-                <p className="text-indigo-400 font-bold text-[10px] uppercase tracking-wider mb-1">When</p>
-                <p className="text-xl font-black italic tracking-tight">08. 05(수) — 08. 08(토)</p>
-                <p className="text-slate-400 text-xs font-medium">3박 4일 영적 대장정</p>
-              </div>
-              <div className="w-full h-[1px] bg-slate-800 my-2"></div>
-              <div>
-                <p className="text-teal-400 font-bold text-[10px] uppercase tracking-wider mb-1">Where</p>
-                <div className="flex justify-between items-end gap-2">
-                  <div>
-                    <p className="text-xl font-black italic">제주도 일대</p>
-                    <p className="text-slate-400 text-xs mt-1">단체 이동 (교회 집결)</p>
-                  </div>
-                </div>
-              </div>
+          <div className="rounded-xl overflow-hidden shadow-lg border border-slate-400 bg-white">
+            <div className="overflow-x-auto">
+              
+              <table className="w-full text-center text-[11.5px] min-w-[620px] border-collapse leading-tight">
+                <thead>
+                  <tr className="bg-[#B4C6E7] text-slate-800 font-black">
+                    <th className={`${B} py-3 w-16 text-[12px]`}>시간 / 날짜</th>
+                    <th className={`${B} py-3 w-[21%] text-[13px]`}>8/5 (수)</th>
+                    <th className={`${B} py-3 w-[21%] text-[13px]`}>8/6 (목)</th>
+                    <th className={`${B} py-3 w-[21%] text-[13px]`}>8/7 (금)</th>
+                    <th className={`${B} py-3 w-[21%] text-[13px]`}>8/8 (토)</th>
+                  </tr>
+                </thead>
+                <tbody className="text-slate-900 font-bold tracking-tight">
+
+                  {/* 05:00 */}
+                  <tr>
+                    <td className={T}>05:00</td>
+                    <td className={`${B} bg-[#E2D2ED] py-3`}>집결 및 기도</td>
+                    <td colSpan={2} rowSpan={2} className={`${B} bg-[#E2EFDA]`}>기상<br/><span className="text-red-600">(06:30)</span></td>
+                    <td rowSpan={3} className={`${B} bg-[#E2EFDA]`}>기상<br/><span className="text-red-600">(07:30)</span></td>
+                  </tr>
+
+                  {/* 06:00 */}
+                  <tr>
+                    <td className={T}>06:00</td>
+                    <td className={`${B} bg-[#FCE4D6] py-3`}>공항으로 출발</td>
+                  </tr>
+
+                  {/* 07:00 */}
+                  <tr>
+                    <td className={T}>07:00</td>
+                    <td rowSpan={2} className={`${B} bg-[#FCE4D6]`}>조식 및<br/>탑승 수속</td>
+                    <td colSpan={2} className={`${B} bg-[#E2D2ED] py-3 ${hl("spiritual")}`}>방별 말씀 나눔</td>
+                  </tr>
+
+                  {/* 08:00 */}
+                  <tr>
+                    <td className={T}>08:00</td>
+                    <td colSpan={2} className={`${B} bg-[#FFF2CC] py-3`}>숙소 조식</td>
+                    <td className={`${B} bg-[#FFF2CC] py-3`}>숙소 조식</td>
+                  </tr>
+
+                  {/* 09:00 */}
+                  <tr>
+                    <td className={T}>09:00</td>
+                    <td rowSpan={2} className={`${B} bg-white`}>비행기 이동<br/><span className="text-red-600 font-black">(09:20 ~ 10:35)</span></td>
+                    <td rowSpan={2} className={`${B} bg-[#D9E1F2] ${hl("calling")}`}>제주 체험 1<br/><span className="text-[10px] font-medium">&lt;스카이 워터쇼&gt;</span></td>
+                    <td rowSpan={2} className={`${B} bg-[#D9E1F2] ${hl("mission")}`}>전도<br/><span className="text-[10px] font-medium">&lt;만장굴&gt;</span></td>
+                    <td className={`${B} bg-white py-3`}>정리 및 퇴실</td>
+                  </tr>
+
+                  {/* 10:00 */}
+                  <tr>
+                    <td className={T}>10:00</td>
+                    <td rowSpan={2} className={`${B} bg-[#FCE4D6]`}>공항으로 출발</td>
+                  </tr>
+
+                  {/* 11:00 */}
+                  <tr>
+                    <td className={T}>11:00</td>
+                    <td className={`${B} bg-[#FCE4D6] py-3`}>짐 찾기<br/>이동</td>
+                    <td className={`${B} bg-[#E2D2ED] py-2 ${hl("mission")}`}>선교지 탐방 1<br/><span className="text-[10px] font-medium">&lt;모슬포교회&gt;</span></td>
+                    <td className={`${B} bg-[#D9E1F2] py-2 ${hl("calling")}`}>제주 체험 2<br/><span className="text-[10px] font-medium">&lt;국립제주박물관&gt;</span></td>
+                  </tr>
+
+                  {/* 12:00 */}
+                  <tr>
+                    <td className={T}>12:00</td>
+                    <td rowSpan={2} className={`${B} bg-[#FFF2CC]`}>중식<br/><span className="text-[10px] font-medium">&lt;고사리맛집흑돼지&gt;</span></td>
+                    <td className={`${B} bg-[#E2D2ED] py-2 ${hl("mission")}`}>선교지 탐방 2<br/><span className="text-[10px] font-medium">&lt;이기풍 선교기념관&gt;</span></td>
+                    <td rowSpan={2} className={`${B} bg-[#FFF2CC]`}>중식<br/><span className="text-[10px] font-medium">&lt;명륜진사 삼화점&gt;</span></td>
+                    <td rowSpan={2} className={`${B} bg-[#FCE4D6]`}>중식 (푸드코트)<br/>및<br/>탑승 수속</td>
+                  </tr>
+
+                  {/* 13:00 */}
+                  <tr>
+                    <td className={T}>13:00</td>
+                    <td className={`${B} bg-[#FFF2CC] py-2`}>중식<br/><span className="text-[10px] font-medium">&lt;그때 그 집&gt;</span></td>
+                  </tr>
+
+                  {/* 14:00 */}
+                  <tr>
+                    <td className={T}>14:00</td>
+                    <td rowSpan={2} className={`${B} bg-[#D9E1F2] ${hl("community")}`}>연합 1<br/><span className="text-[10px] font-medium">&lt;알프스 제주점&gt;</span></td>
+                    <td rowSpan={2} className={`${B} bg-[#E2D2ED] ${hl("mission")}`}>선교지 탐방 3<br/><span className="text-[10px] font-medium">&lt;강병대 교회&gt;</span></td>
+                    <td rowSpan={2} className={`${B} bg-[#D9E1F2] ${hl("community")}`}>연합 4<br/><span className="text-[10px] font-medium">&lt;퐁당제주&gt;</span></td>
+                    <td className={`${B} bg-[#FCE4D6] py-3`}>비행기 이동<br/><span className="text-red-600 font-black">(13:45 ~ 15:00)</span></td>
+                  </tr>
+
+                  {/* 15:00 */}
+                  <tr>
+                    <td className={T}>15:00</td>
+                    <td rowSpan={9} className={`${B} bg-[#FCE4D6]`}>짐 찾기<br/><br/>교회 이동</td>
+                  </tr>
+
+                  {/* 16:00 */}
+                  <tr>
+                    <td className={T}>16:00</td>
+                    <td rowSpan={2} className={`${B} bg-[#D9E1F2] ${hl("community")}`}>연합 2<br/><span className="text-[10px] font-medium">&lt;다이나믹 메이즈&gt;</span></td>
+                    <td rowSpan={2} className={`${B} bg-[#D9E1F2] ${hl("community")}`}>연합 3<br/><span className="text-[10px] font-medium">&lt;런닝맨&gt;</span></td>
+                    <td rowSpan={2} className={`${B} bg-[#D9E1F2] ${hl("community")}`}>하나됨<br/><span className="text-[10px] font-medium">&lt;곽지 해수욕장&gt;</span></td>
+                  </tr>
+
+                  {/* 17:00 */}
+                  <tr>
+                    <td className={T}>17:00</td>
+                  </tr>
+
+                  {/* 18:00 */}
+                  <tr>
+                    <td className={T}>18:00</td>
+                    <td colSpan={3} className={`${B} bg-[#FFF2CC] py-3`}>숙소 석식</td>
+                  </tr>
+
+                  {/* 19:00 */}
+                  <tr>
+                    <td className={T}>19:00</td>
+                    <td rowSpan={3} className={`${B} bg-[#E2D2ED] ${hl("spiritual")}`}>예배 및 기도회<br/>1</td>
+                    <td rowSpan={3} className={`${B} bg-[#E2D2ED] ${hl("spiritual")}`}>예배 및 기도회<br/>2</td>
+                    <td rowSpan={4} className={`${B} bg-[#E2D2ED] ${hl("spiritual")}`}>예배 및 기도회<br/>3</td>
+                  </tr>
+
+                  {/* 20:00 */}
+                  <tr><td className={T}>20:00</td></tr>
+
+                  {/* 21:00 */}
+                  <tr><td className={T}>21:00</td></tr>
+
+                  {/* 22:00 */}
+                  <tr>
+                    <td className={T}>22:00</td>
+                    <td colSpan={2} className={`${B} bg-[#FFF2CC] py-2 ${hl("community")}`}>맛있는 간식으로 화합과 나눔</td>
+                  </tr>
+
+                  {/* 23:00 */}
+                  <tr>
+                    <td className={T}>23:00</td>
+                    <td colSpan={3} className={`${B} bg-[#E2EFDA] py-3`}>취침</td>
+                  </tr>
+
+                </tbody>
+              </table>
             </div>
           </div>
         </section>
 
-        {/* 2. 사역 목표 */}
-        <section className="space-y-2">
-          <div className="flex items-center gap-2 mb-1">
-            <span className="bg-indigo-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded italic">PART 02</span>
-            <h2 className="text-lg font-black italic">사역 목표</h2>
-          </div>
-          <div className="grid gap-2">
-            {goals.map((goal, index) => (
-              <div key={index} className="flex items-center gap-3 p-3 rounded-2xl border border-slate-100 bg-white shadow-sm">
-                <div className={`shrink-0 w-10 h-10 ${goal.color} rounded-lg flex items-center justify-center text-xl`}>{goal.emoji}</div>
-                <div>
-                  <h3 className="text-sm font-black">{goal.title}</h3>
-                  <p className="text-slate-500 text-[11px] leading-tight break-keep font-medium mt-0.5">{goal.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* 3. 상세 프로그램 */}
-        <section className="space-y-2">
-          <div className="flex items-center gap-2 mb-1">
-            <span className="bg-indigo-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded italic">PART 03</span>
-            <h2 className="text-lg font-black italic">상세 프로그램</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {schedule.map((day, idx) => (
-              <div key={idx} className="bg-slate-50 rounded-2xl p-4 border border-slate-100 shadow-sm">
-                <div className="mb-3 flex justify-between items-baseline border-b border-slate-200 pb-2">
-                  <h3 className="text-[15px] font-black text-slate-800">{day.day}</h3>
-                  <span className="text-indigo-600 font-black text-[10px] bg-indigo-50 px-2 py-0.5 rounded-full">{day.date}</span>
-                </div>
-                <div className="space-y-0.5">
-                  {day.items.map((item, i) => (
-                    <div key={i} className="flex justify-between items-center text-[12px] border-b border-slate-200/50 py-1.5 last:border-0 last:pb-0">
-                      <span className="font-bold text-slate-400 w-12 shrink-0">{item.time}</span>
-                      <span className={`${item.color} font-bold text-right break-keep leading-snug`}>{item.task}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* 푸터 */}
-        <div className="pt-8 text-center border-t border-slate-100 mt-8">
+        {/* 푸터 영역 */}
+        <div className="pt-8 text-center border-t border-slate-200 mt-8">
           <p className="text-slate-400 text-[10px] font-black tracking-tighter">CONNECT & COMBINE | 2026 JEJU</p>
         </div>
 
