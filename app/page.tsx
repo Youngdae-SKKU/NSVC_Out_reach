@@ -68,7 +68,20 @@ export default async function Home() {
 
       {/* 🚀 상단 헤더 */}
       <div className="relative z-10 bg-gradient-to-r from-[#8B5CF6] via-[#6366F1] to-[#3B82F6] pt-2 pb-2 text-center rounded-b-[30px] shadow-lg">
-        <div className="max-w-6xl mx-auto px-4">
+        {/* 💡 relative 속성을 추가하여 내부 버튼의 기준점을 잡아줍니다 */}
+        <div className="max-w-6xl mx-auto px-4 relative">
+          
+          {/* ✨ 우측 상단 기도카드 버튼 추가 */}
+          <a 
+            href="/기도카드_0710.jpg" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="absolute top-0 right-1 flex flex-col items-center justify-center bg-white/20 hover:bg-white/30 transition-all p-1.5 rounded-xl backdrop-blur-md border border-white/30 shadow-sm z-20 group cursor-pointer"
+          >
+            <span className="text-xl group-hover:scale-110 transition-transform">🙏</span>
+            <span className="text-[10px] font-black text-white mt-0.5 tracking-tight drop-shadow-md">기도카드</span>
+          </a>
+
           <div className="inline-flex items-center gap-1 bg-white/20 text-white text-[12px] md:text-[14px] font-black pl-4 pr-1.5 py-1.5 rounded-full backdrop-blur-md border border-white/30 mb-3 tracking-widest shadow-sm">
             <span>🔥 2026 SUMMER OUTREACH</span>
             <span className="bg-gradient-to-r from-[#FFD700] via-[#FFF8B0] to-[#FFD700] text-indigo-900 px-3 py-0.5 rounded-full tracking-tighter shadow-[0_0_20px_rgba(255,215,0,0.9),0_0_10px_rgba(255,255,255,0.6)] border border-yellow-200 animate-pulse font-extrabold">
@@ -156,7 +169,6 @@ export default async function Home() {
                           )}
                         </div>
                         
-                        {/* 🚀 메인 페이지도 글자 잘림 방지 똑같이 적용! */}
                         {isLongText ? (
                           <div className="relative w-full">
                             <input type="checkbox" id={`main-notice-${notice.id}`} className="peer hidden" />
