@@ -5,7 +5,7 @@ import Link from "next/link";
 // ✅ Next.js 빌드 및 배포 에러 방지를 위한 설정
 export const dynamic = "force-dynamic";
 
-// 💖 찬조자 명단 (여기에 쉼표로 구분해서 이름만 적어주시면 총 인원수와 명단이 자동 업데이트됩니다!)
+// 💖 찬조자 명단
 const sponsors = [
   "김영대 부장 집사",
   "김동선 부감 권사",
@@ -68,21 +68,45 @@ export default async function Home() {
 
       {/* 🚀 상단 헤더 */}
       <div className="relative z-10 bg-gradient-to-r from-[#8B5CF6] via-[#6366F1] to-[#3B82F6] pt-2 pb-2 text-center rounded-b-[30px] shadow-lg">
-        {/* 💡 relative 속성을 추가하여 내부 버튼의 기준점을 잡아줍니다 */}
         <div className="max-w-6xl mx-auto px-4 relative">
           
-          {/* ✨ 우측 상단 기도카드 버튼 추가 */}
-          <a 
-            href="/기도카드_0710.jpg" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="absolute top-0 right-1 flex flex-col items-center justify-center bg-white/20 hover:bg-white/30 transition-all p-1.5 rounded-xl backdrop-blur-md border border-white/30 shadow-sm z-20 group cursor-pointer"
-          >
-            <span className="text-xl group-hover:scale-110 transition-transform">🙏</span>
-            <span className="text-[10px] font-black text-white mt-0.5 tracking-tight drop-shadow-md">기도카드</span>
-          </a>
+          {/* ✨ 우측 상단 플로팅 버튼 그룹 (세로 정렬) */}
+          <div className="absolute top-0 right-1 flex flex-col gap-2 z-20">
+            {/* 1. 기존 기도카드 */}
+            <a 
+              href="/기도카드_0710.jpg" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex flex-col items-center justify-center bg-white/20 hover:bg-white/30 transition-all p-1.5 rounded-xl backdrop-blur-md border border-white/30 shadow-sm group cursor-pointer w-[64px]"
+            >
+              <span className="text-xl group-hover:scale-110 transition-transform">🙏</span>
+              <span className="text-[10px] font-black text-white mt-0.5 tracking-tight drop-shadow-md">기도카드</span>
+            </a>
 
-          <div className="inline-flex items-center gap-1 bg-white/20 text-white text-[12px] md:text-[14px] font-black pl-4 pr-1.5 py-1.5 rounded-full backdrop-blur-md border border-white/30 mb-3 tracking-widest shadow-sm">
+            {/* 2. 금식기도제목 추가 */}
+            <a 
+              href="/금식기도제목.jpg" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex flex-col items-center justify-center bg-white/20 hover:bg-white/30 transition-all p-1.5 rounded-xl backdrop-blur-md border border-white/30 shadow-sm group cursor-pointer w-[64px]"
+            >
+              <span className="text-xl group-hover:scale-110 transition-transform">🔥</span>
+              <span className="text-[10px] font-black text-white mt-0.5 tracking-tight drop-shadow-md">금식기도</span>
+            </a>
+
+            {/* 3. 릴레이명단 추가 */}
+            <a 
+              href="/금식릴레이.jpg" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex flex-col items-center justify-center bg-white/20 hover:bg-white/30 transition-all p-1.5 rounded-xl backdrop-blur-md border border-white/30 shadow-sm group cursor-pointer w-[64px]"
+            >
+              <span className="text-xl group-hover:scale-110 transition-transform">👥</span>
+              <span className="text-[10px] font-black text-white mt-0.5 tracking-tight drop-shadow-md">릴레이명단</span>
+            </a>
+          </div>
+
+          <div className="inline-flex items-center gap-1 bg-white/20 text-white text-[12px] md:text-[14px] font-black pl-4 pr-1.5 py-1.5 rounded-full backdrop-blur-md border border-white/30 mb-3 tracking-widest shadow-sm mt-1">
             <span>🔥 2026 SUMMER OUTREACH</span>
             <span className="bg-gradient-to-r from-[#FFD700] via-[#FFF8B0] to-[#FFD700] text-indigo-900 px-3 py-0.5 rounded-full tracking-tighter shadow-[0_0_20px_rgba(255,215,0,0.9),0_0_10px_rgba(255,255,255,0.6)] border border-yellow-200 animate-pulse font-extrabold">
               {dDayText}
