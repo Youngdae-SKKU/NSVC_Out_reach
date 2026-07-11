@@ -220,7 +220,7 @@ export default function IntroPage() {
               <h2 className="text-lg font-black italic">상세 프로그램</h2>
             </div>
             <span className="text-[10px] text-rose-500 font-bold animate-pulse">
-              표를 좌우로 밀어보세요 👉
+               
             </span>
           </div>
 
@@ -230,7 +230,7 @@ export default function IntroPage() {
               <div style={{ width: tableWidth, height: 1 }} />
             </div>
             <div ref={bottomScrollRef} onScroll={onBottomScroll} className="overflow-x-auto">
-              <table className="w-full text-center text-[11.5px] min-w-[620px] border-collapse leading-tight">
+              <table className="w-full table-fixed text-center text-[11px] min-w-[360px] border-collapse leading-tight break-keep">
                 <thead>
                   <tr className="bg-[#B4C6E7] text-slate-800 font-black">
                     <th className={`${B} py-3 w-16 text-[12px]`}>시간 / 날짜</th>
@@ -242,79 +242,79 @@ export default function IntroPage() {
                 </thead>
                 <tbody className="text-slate-900 font-bold tracking-tight">
                   {/* 05:00 */}
-                  <tr><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">05:00</span></td><td className={`${B} bg-[#E2D2ED] py-2`}>집결 및 기도</td><td colSpan={2} rowSpan={2} className={`${B} bg-[#E2EFDA] py-2`}>기상<br/><span className="text-red-600 font-black">(06:30)</span></td><td rowSpan={5} className={`${B} bg-[#E2EFDA] py-2`}>기상<br/><span className="text-red-600 font-black">(07:30)</span></td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">05:00</span></td><td className={`${B} bg-[#E2D2ED]`}>집결 및 기도</td><td colSpan={2} rowSpan={2} className={`${B} bg-[#E2EFDA]`}>기상<br/><span className="text-red-600 font-black">(06:30)</span></td><td rowSpan={5} className={`${B} bg-[#E2EFDA]`}>기상<br/><span className="text-red-600 font-black">(07:30)</span></td></tr>
                   {/* 05:30 */}
-                  <tr><td rowSpan={3} className={`${B} bg-[#FCE4D6] py-2`}>공항으로 출발</td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={3} className={`${B} bg-[#FCE4D6]`}>공항으로 출발</td></tr>
                   {/* 06:00 */}
-                  <tr><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">06:00</span></td><td colSpan={2} rowSpan={2} className={`${B} bg-[#E2D2ED] ${hl("spiritual")} py-2`}>방별 말씀 나눔</td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">06:00</span></td><td colSpan={2} rowSpan={2} className={`${B} bg-[#E2D2ED] ${hl("spiritual")}`}>방별 말씀 나눔</td></tr>
                   {/* 06:30 */}
-                  <tr></tr>
+                  <tr style={{ height: 20 }}></tr>
                   {/* 07:00 */}
-                  <tr><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">07:00</span></td><td rowSpan={4} className={`${B} bg-[#FCE4D6] py-2`}>조식 및<br/>탑승 수속</td><td colSpan={2} rowSpan={2} className={`${B} bg-[#FFF2CC] py-2`}>숙소 조식</td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">07:00</span></td><td rowSpan={4} className={`${B} bg-[#FCE4D6]`}>조식 및<br/>탑승 수속</td><td colSpan={2} rowSpan={2} className={`${B} bg-[#FFF2CC]`}>숙소 조식</td></tr>
                   {/* 07:30 */}
-                  <tr><td rowSpan={2} className={`${B} bg-[#FFF2CC] py-2`}>숙소 조식</td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={2} className={`${B} bg-[#FFF2CC]`}>숙소 조식</td></tr>
                   {/* 08:00 */}
-                  <tr><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">08:00</span></td><td rowSpan={5} className={`${B} bg-[#D9E1F2] ${hl("calling")} py-2`}>제주 체험 1<br/><span className="text-[10px] font-medium">&lt;스카이 워터쇼&gt;</span></td><td rowSpan={5} className={`${B} bg-[#D9E1F2] ${hl("mission")} py-2`}>전도<br/><span className="text-[10px] font-medium">&lt;만장굴&gt;</span></td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">08:00</span></td><td rowSpan={5} className={`${B} bg-[#D9E1F2] ${hl("calling")}`}>제주 체험 1<br/><span className="text-[10px] font-medium">&lt;스카이 워터쇼&gt;</span></td><td rowSpan={5} className={`${B} bg-[#D9E1F2] ${hl("mission")}`}>전도<br/><span className="text-[10px] font-medium">&lt;만장굴&gt;</span></td></tr>
                   {/* 08:30 */}
-                  <tr><td rowSpan={2} className={`${B} bg-white py-2`}>정리 및 퇴실</td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={2} className={`${B} bg-white`}>정리 및 퇴실</td></tr>
                   {/* 09:00 */}
-                  <tr><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">09:00</span></td><td rowSpan={3} className={`${B} bg-white py-2`}>비행기 이동<br/><span className="text-red-600 font-black">(09:20 ~ 10:35)</span></td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">09:00</span></td><td rowSpan={3} className={`${B} bg-white`}>비행기 이동<br/><span className="text-red-600 font-black">(09:20 ~ 10:35)</span></td></tr>
                   {/* 09:30 */}
-                  <tr><td rowSpan={4} className={`${B} bg-[#FCE4D6] py-2`}>공항으로 출발</td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={4} className={`${B} bg-[#FCE4D6]`}>공항으로 출발</td></tr>
                   {/* 10:00 */}
-                  <tr><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">10:00</span></td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">10:00</span></td></tr>
                   {/* 10:30 */}
-                  <tr><td rowSpan={3} className={`${B} bg-[#FCE4D6] py-2`}>짐 찾기<br/>이동</td><td rowSpan={2} className={`${B} bg-[#E2D2ED] ${hl("mission")} py-2`}>선교지 탐방 1<br/><span className="text-[10px] font-medium">&lt;모슬포교회&gt;</span></td><td rowSpan={2} className={`${B} bg-[#D9E1F2] ${hl("calling")} py-2`}>제주 체험 2<br/><span className="text-[10px] font-medium">&lt;국립제주박물관&gt;</span></td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={3} className={`${B} bg-[#FCE4D6]`}>짐 찾기<br/>이동</td><td rowSpan={2} className={`${B} bg-[#E2D2ED] ${hl("mission")}`}>선교지 탐방 1<br/><span className="text-[10px] font-medium">&lt;모슬포교회&gt;</span></td><td rowSpan={2} className={`${B} bg-[#D9E1F2] ${hl("calling")}`}>제주 체험 2<br/><span className="text-[10px] font-medium">&lt;국립제주박물관&gt;</span></td></tr>
                   {/* 11:00 */}
-                  <tr><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">11:00</span></td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">11:00</span></td></tr>
                   {/* 11:30 */}
-                  <tr><td rowSpan={3} className={`${B} bg-[#E2D2ED] ${hl("mission")} py-2`}>선교지 탐방 2<br/><span className="text-[10px] font-medium">&lt;이기풍 선교기념관&gt;</span></td><td rowSpan={4} className={`${B} bg-[#FFF2CC] py-2`}>중식<br/><span className="text-[10px] font-medium">&lt;명륜진사 삼화점&gt;</span></td><td rowSpan={4} className={`${B} bg-[#FCE4D6] py-2`}>중식 (푸드코트)<br/>및<br/>탑승 수속</td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={3} className={`${B} bg-[#E2D2ED] ${hl("mission")}`}>선교지 탐방 2<br/><span className="text-[10px] font-medium">&lt;이기풍 선교기념관&gt;</span></td><td rowSpan={4} className={`${B} bg-[#FFF2CC]`}>중식<br/><span className="text-[10px] font-medium">&lt;명륜진사 삼화점&gt;</span></td><td rowSpan={4} className={`${B} bg-[#FCE4D6]`}>중식 (푸드코트)<br/>및<br/>탑승 수속</td></tr>
                   {/* 12:00 */}
-                  <tr><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">12:00</span></td><td rowSpan={3} className={`${B} bg-[#FFF2CC] py-2`}>중식<br/><span className="text-[10px] font-medium">&lt;고사리맛집흑돼지&gt;</span></td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">12:00</span></td><td rowSpan={3} className={`${B} bg-[#FFF2CC]`}>중식<br/><span className="text-[10px] font-medium">&lt;고사리맛집흑돼지&gt;</span></td></tr>
                   {/* 12:30 */}
-                  <tr></tr>
+                  <tr style={{ height: 20 }}></tr>
                   {/* 13:00 */}
-                  <tr><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">13:00</span></td><td rowSpan={3} className={`${B} bg-[#FFF2CC] py-2`}>중식<br/><span className="text-[10px] font-medium">&lt;그때 그 집&gt;</span></td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">13:00</span></td><td rowSpan={3} className={`${B} bg-[#FFF2CC]`}>중식<br/><span className="text-[10px] font-medium">&lt;그때 그 집&gt;</span></td></tr>
                   {/* 13:30 */}
-                  <tr><td rowSpan={5} className={`${B} bg-[#D9E1F2] ${hl("community")} py-2`}>연합 1<br/><span className="text-[10px] font-medium">&lt;알프스 제주점&gt;</span></td><td rowSpan={5} className={`${B} bg-[#D9E1F2] ${hl("community")} py-2`}>연합 4<br/><span className="text-[10px] font-medium">&lt;퐁당제주&gt;</span></td><td rowSpan={3} className={`${B} bg-[#FCE4D6] py-2`}>비행기 이동<br/><span className="text-red-600 font-black">(13:45 ~ 15:00)</span></td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={5} className={`${B} bg-[#D9E1F2] ${hl("community")}`}>연합 1<br/><span className="text-[10px] font-medium">&lt;알프스 제주점&gt;</span></td><td rowSpan={5} className={`${B} bg-[#D9E1F2] ${hl("community")}`}>연합 4<br/><span className="text-[10px] font-medium">&lt;퐁당제주&gt;</span></td><td rowSpan={3} className={`${B} bg-[#FCE4D6]`}>비행기 이동<br/><span className="text-red-600 font-black">(13:45 ~ 15:00)</span></td></tr>
                   {/* 14:00 */}
-                  <tr><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">14:00</span></td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">14:00</span></td></tr>
                   {/* 14:30 */}
-                  <tr><td rowSpan={3} className={`${B} bg-[#E2D2ED] ${hl("mission")} py-2`}>선교지 탐방 3<br/><span className="text-[10px] font-medium">&lt;강병대 교회&gt;</span></td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={3} className={`${B} bg-[#E2D2ED] ${hl("mission")}`}>선교지 탐방 3<br/><span className="text-[10px] font-medium">&lt;강병대 교회&gt;</span></td></tr>
                   {/* 15:00 */}
-                  <tr><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">15:00</span></td><td rowSpan={17} className={`${B} bg-[#FCE4D6] py-2`}>짐 찾기<br/><br/>교회 이동</td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">15:00</span></td><td rowSpan={17} className={`${B} bg-[#FCE4D6]`}>짐 찾기<br/><br/>교회 이동</td></tr>
                   {/* 15:30 */}
-                  <tr></tr>
+                  <tr style={{ height: 20 }}></tr>
                   {/* 16:00 */}
-                  <tr><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">16:00</span></td><td rowSpan={4} className={`${B} bg-[#D9E1F2] ${hl("community")} py-2`}>연합 2<br/><span className="text-[10px] font-medium">&lt;다이나믹 메이즈&gt;</span></td><td rowSpan={4} className={`${B} bg-[#D9E1F2] ${hl("community")} py-2`}>연합 3<br/><span className="text-[10px] font-medium">&lt;런닝맨&gt;</span></td><td rowSpan={4} className={`${B} bg-[#D9E1F2] ${hl("community")} py-2`}>하나됨<br/><span className="text-[10px] font-medium">&lt;곽지 해수욕장&gt;</span></td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">16:00</span></td><td rowSpan={4} className={`${B} bg-[#D9E1F2] ${hl("community")}`}>연합 2<br/><span className="text-[10px] font-medium">&lt;다이나믹 메이즈&gt;</span></td><td rowSpan={4} className={`${B} bg-[#D9E1F2] ${hl("community")}`}>연합 3<br/><span className="text-[10px] font-medium">&lt;런닝맨&gt;</span></td><td rowSpan={4} className={`${B} bg-[#D9E1F2] ${hl("community")}`}>하나됨<br/><span className="text-[10px] font-medium">&lt;곽지 해수욕장&gt;</span></td></tr>
                   {/* 16:30 */}
-                  <tr></tr>
+                  <tr style={{ height: 20 }}></tr>
                   {/* 17:00 */}
-                  <tr><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">17:00</span></td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">17:00</span></td></tr>
                   {/* 17:30 */}
-                  <tr></tr>
+                  <tr style={{ height: 20 }}></tr>
                   {/* 18:00 */}
-                  <tr><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">18:00</span></td><td colSpan={3} rowSpan={2} className={`${B} bg-[#FFF2CC] py-2`}>숙소 석식</td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">18:00</span></td><td colSpan={3} rowSpan={2} className={`${B} bg-[#FFF2CC]`}>숙소 석식</td></tr>
                   {/* 18:30 */}
-                  <tr></tr>
+                  <tr style={{ height: 20 }}></tr>
                   {/* 19:00 */}
-                  <tr><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">19:00</span></td><td rowSpan={6} className={`${B} bg-[#E2D2ED] ${hl("spiritual")} py-2`}>예배 및 기도회 1</td><td rowSpan={6} className={`${B} bg-[#E2D2ED] ${hl("spiritual")} py-2`}>예배 및 기도회 2</td><td rowSpan={9} className={`${B} bg-[#E2D2ED] ${hl("spiritual")} py-2`}>예배 및 기도회 3</td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">19:00</span></td><td rowSpan={6} className={`${B} bg-[#E2D2ED] ${hl("spiritual")}`}>예배 및 기도회 1</td><td rowSpan={6} className={`${B} bg-[#E2D2ED] ${hl("spiritual")}`}>예배 및 기도회 2</td><td rowSpan={9} className={`${B} bg-[#E2D2ED] ${hl("spiritual")}`}>예배 및 기도회 3</td></tr>
                   {/* 19:30 */}
-                  <tr></tr>
+                  <tr style={{ height: 20 }}></tr>
                   {/* 20:00 */}
-                  <tr><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">20:00</span></td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">20:00</span></td></tr>
                   {/* 20:30 */}
-                  <tr></tr>
+                  <tr style={{ height: 20 }}></tr>
                   {/* 21:00 */}
-                  <tr><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">21:00</span></td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">21:00</span></td></tr>
                   {/* 21:30 */}
-                  <tr></tr>
+                  <tr style={{ height: 20 }}></tr>
                   {/* 22:00 */}
-                  <tr><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">22:00</span></td><td colSpan={2} className={`${B} bg-[#FFF2CC] ${hl("community")} py-2`}>맛있는 간식으로 화합과 나눔</td></tr>
+                  <tr style={{ height: 20 }}><td rowSpan={2} className={T}><span className="relative -top-[8px] inline-block">22:00</span></td><td colSpan={2} className={`${B} bg-[#FFF2CC] ${hl("community")}`}>맛있는 간식으로 화합과 나눔</td></tr>
                   {/* 22:30 */}
-                  <tr><td colSpan={2} rowSpan={2} className={`${B} bg-[#E2EFDA] py-2`}>취침</td></tr>
+                  <tr style={{ height: 20 }}><td colSpan={2} rowSpan={2} className={`${B} bg-[#E2EFDA]`}>취침</td></tr>
                   {/* 23:00 */}
-                  <tr><td className={T}><span className="relative -top-[8px] inline-block">23:00</span></td></tr>
+                  <tr style={{ height: 20 }}><td className={T}><span className="relative -top-[8px] inline-block">23:00</span></td></tr>
                 </tbody>
               </table>
             </div>
